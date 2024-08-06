@@ -33,10 +33,12 @@ background-color: #e9ecef;
     background-color:#f8f9fa ;
 }
 .form{
+    /* position: relative; */
     /* background-color: #dcedef;      */
     font-family:Verdana, Geneva, Tahoma, sans-serif ;
     padding: 2.2pc 5pc 2.5pc 3pc;
     width: 35pc;
+    /* border-top: 5px solid transparent; */
 }
 .form h2{
     font-size: 2.1rem;
@@ -165,33 +167,28 @@ right: 0px;
     cursor: pointer;
 }
 
+/* blur while load */
+.blurLink{
+    color: #1e88e59f;
+    pointer-events: none;
+}
+.pointerNoneLoading{
+    pointer-events: none;
+}
+/* animation border */
+.formanime{
+    width: 50%;
+    border-top: 5px solid transparent;
+}
+.formanimeLoading{
+    /* height: 20px; */
+    width: 50%;
+    border-top: 5px solid #1e88e59f;
+    animation: loadingAnimation 2.5s infinite;
+}
+@keyframes loadingAnimation {
+   0%{transform: translateX(0%);}
+   50%{transform: translateX(100%);}
+   100%{transform: translateX(0%);}
+}
 
-/* Login */
-.formLogin{
-    padding-top: 4pc;
-    font-family:Verdana, Geneva, Tahoma, sans-serif ;
-    padding: 1.2pc 5pc 1.5pc 3pc;
-    width: 25pc;
-}
-.loginContent{
-    margin-top: -5px;
-    font-size: 0.85rem;
-}
-.loginContent input{
-    display: block;
-    padding: 0.6pc;
-    border: none;
-    outline: none;
-    border-radius: 3px;
-    margin: 15px 0px;
-    width: 80%;
-    background-color:#e9ecef
-}
-.loginContent button{
-    border: none;
-    margin-top: 10px;
-    padding: 0.6pc 1.5pc;
-    border-radius: 15px;
-    background-color:#1e88e5;
-    color: white;
-}
