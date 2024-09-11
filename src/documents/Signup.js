@@ -3,6 +3,7 @@ import '../stylesheets/signupLogin.css'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Login } from './Login';
 
 export function Signup() {
   // set datas by the user 
@@ -12,14 +13,18 @@ export function Signup() {
   const [psd, setPsd] = useState();
   const [cnfPsd, setCnfPsd] = useState();
 
-  const [isWarningPsd, printWarningPsd] = useState('');
-  const [isWarningPhone, printWarningPhone] = useState('');
-  const [isWarnCondition, setWarnCondition] = useState(false);
-  const [isshowpsd, setShowpsd] = useState('');
+  const [isWarningPsd, printWarningPsd] = useState(''); // warning for password wrong
+  const [isWarningPhone, printWarningPhone] = useState(''); // warning for phone number wrong
+  const [isWarnCondition, setWarnCondition] = useState(false); //when occurs warning
+  const [isshowpsd, setShowpsd] = useState(''); //eye to see password
 
-  const [isdisabled, setDisabled] = useState(false);
-  const [colorFunction, setColorFunction] = useState({ backgroundColor: '', color: '' });
+  const [isdisabled, setDisabled] = useState(false); // disable inputs
+  const [colorFunction, setColorFunction] = useState({ backgroundColor: '', color: '' }); // blur form
 
+  const [buttonClr,setButtonClr] = useState({}); //blur signup button
+
+  const [hasFetchError,setHasfetchError] = useState(false);
+  const [printfetchError,setfetchError] = useState('');
 
   useEffect(() => {
     document.body.classList.add('signupBody', 'flexbody')
@@ -42,16 +47,25 @@ export function Signup() {
       color: ''
     })
   }
-  // pointer none and blur while loading 
+  // signupbutton blur
+  const signupButtonLoad = () => {
+    setButtonClr({ backgroundColor: '#1e88e572',
+      pointerEvents: 'none'})
+  }
+  // remove signupbutton blur
+  const RemovesignupButtonLoad = () => {
+    setButtonClr({ backgroundColor: '',
+      pointerEvents: ''})
+  }
+
+  // pointerNone and blur while loading 
  const pointerNoneBlur = () => {
-  document.querySelector('#createAccount-btn').classList.add('pointerNoneLoading');
   document.querySelector('#streching').classList.add('blurLink');
   document.querySelector('#eye').classList.add('pointerNoneLoading');
   document.querySelector('.formanime').classList.add('formanimeLoading');
  }
-//  removing pointer none and blur while loading
+//  removing pointerNone and blur after loading
 const NotpointerNoneBlur = () => {
-  document.querySelector('#createAccount-btn').classList.remove('pointerNoneLoading');
   document.querySelector('#streching').classList.remove('blurLink');
   document.querySelector('#eye').classList.remove('pointerNoneLoading');
   document.querySelector('.formanime').classList.remove('formanimeLoading');
@@ -67,11 +81,8 @@ const NotpointerNoneBlur = () => {
   }
   // show password
   const showpsd = () => {
-    setShowpsd(prevState => !prevState);
+    setShowpsd(!isshowpsd);
   }
-
-
-
 
   let navigate = useNavigate();
 
@@ -79,9 +90,13 @@ const NotpointerNoneBlur = () => {
   //  signup click
   const signUpHandler = (event) => {
     event.preventDefault();
+    setHasfetchError(false); // not to print error message
+    setfetchError('')
+
 // cancelling all effects of loading and disabling after getting success signup
     setDisabled(false);
     NotformDisableStyle();
+    RemovesignupButtonLoad();
     NotpointerNoneBlur();
 
     // removing border and warning message when phone number and psd are correct
@@ -116,19 +131,21 @@ const NotpointerNoneBlur = () => {
     }
     // for posting
     const formData = new FormData();
-    formData.append('Username', name);
+    formData.append('userName', name);
     formData.append('email', email);
     formData.append('phone', ph);
     formData.append('password', psd);
     // when all criteria matches 
     if (Number(ph) && ph.toString().length === 10 && psd === cnfPsd) {
+      // setHasfetchError(true);
       setDisabled(true);
       formDisableStyle();
+      signupButtonLoad();
       pointerNoneBlur();
-      axios.post('http://www.localhost:3000/user/signp',formData)
+      axios.post('http://www.localhost:3000/user/signup',formData)
       .then(res => {
         setTimeout(() => {
-          console.log(res);
+        console.log(res);
         console.log('signed up');
         navigate('/login');
         }, 2000);
@@ -137,8 +154,11 @@ const NotpointerNoneBlur = () => {
         setTimeout(() => {
           setDisabled(false);
         NotformDisableStyle();
+        RemovesignupButtonLoad();
         NotpointerNoneBlur();
         console.log(err);
+        setHasfetchError(true);
+        setfetchError('Signup Failed! please check your internet connection.');
         }, 5000);
       })
     }
@@ -147,51 +167,52 @@ const NotpointerNoneBlur = () => {
   }
 
 
-  return (<div className='signupComponent'>
+  return (<>
 
-    {/* <buttonstyle={colorFunction} onClick={modeChange}>dark mode</button> */}
-    <div className='formanime' />
-    <form className='form' onSubmit={signUpHandler} style={colorFunction} >
-
+  <div className='signupComponent'>
+  <div className='formanime' />
+    
+    <form className='form' onSubmit={signUpHandler} style={colorFunction}>
+    {hasFetchError && <p id='printErrSignup'>{printfetchError}</p>}
       <h2>welcome to <b>Mall</b></h2>
       <h4>create your account</h4>
       <div className='signupContent'>
         <div id='float'>
-          <input id='full-name' required
-            type='text' placeholder='' onChange={(e) => setName(e.target.value)} disabled={isdisabled} />
+          <input  id='full-name'  autoFocus
+            type='text' placeholder='' onChange={(e) => setName(e.target.value)} disabled={isdisabled}/>
           <label htmlFor='full-name'>Full name</label>
         </div>
         <div id='float'>
-          <input id='email' required type="email"
+          <input  id='email'  type="email"
             placeholder='' onChange={(e) => setEmail(e.target.value)} disabled={isdisabled} />
           <label htmlFor='email'>Email</label>
         </div>
         <div id='float'>
-          <input id='phone-number' type='tel'
-            required placeholder='' onChange={(e) => setPh(e.target.value)} disabled={isdisabled} />
+          <input  id='phone-number' type='tel'
+             placeholder='' onChange={(e) => setPh(e.target.value)} disabled={isdisabled} />
           <label htmlFor='phone-number'>Phone number</label>
           {isWarnCondition && <p id='warningPara'>{isWarningPhone}</p>}
         </div>
         <div id='float' >
-          <input id='psd' type='password' required
+          <input  id='psd' type='password' 
             placeholder='' onChange={(e) => setPsd(e.target.value)} disabled={isdisabled} />
           <label htmlFor='psd'>New Password</label>
         </div>
         <div id='float'>
-          <input id='conf-psd' required placeholder=''
+          <input  id='conf-psd'  placeholder=''
             type={isshowpsd ? 'text' : 'password'} onChange={(e) => setCnfPsd(e.target.value)} disabled={isdisabled} />
           <label htmlFor='conf-psd'>Confirm Password</label>
           <p disabled={isdisabled} onClick={showpsd} id='eye'>{isshowpsd ? 'Hide' : 'Show'}</p>
           {isWarnCondition && <p id='warningPara'>{isWarningPsd}</p>}
         </div>
-        <button style={colorFunction} type='submit' disabled={isdisabled} id='createAccount-btn'>Create Account</button>
+        <button type='submit' style={buttonClr} disabled={isdisabled} id='createAccount-btn'>Create Account</button>      
         <hr />
         <div id='text'><p id='loginSignupInfo'>Already have an account? <Link to='/login' id='streching'>Login</Link></p></div>
       </div>
-      {/* {isLoading && document.querySelector('.form').classList.add('formLoadingAnimation')}; */}
 
     </form>
+    
 
-
-  </div>)
+  </div>
+  </>)
 }
