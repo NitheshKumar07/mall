@@ -1,0 +1,270 @@
+.soloLaptop-Container{
+    display: flex;
+    font-family:var(--standard-Montserratfont) ;
+    color: #171717;
+    width: 100%;
+    min-height:650px;
+}
+.soloLaptop-Container .soloItem-complete-price{
+    display: flex;
+    margin:10px 0;
+}
+/* image ...............................................................................................*/
+.soloLaptopImg-Container{
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.soloLaptopImg-box{
+    width: 90%;
+    /* height:65%; */
+}
+#soloLaptop-img{
+    width: 100%;
+    height: 100%;
+}
+/* item details ..................................................................................................................*/
+.soloLaptop-Container .soloLaptop-details-decription-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50%;
+    height: 100%;
+}
+.soloLaptopDetails-container{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+#soloItem-brandName{
+    text-transform: uppercase;
+    font-size: 1.45em;
+    font-weight: 600;
+    letter-spacing: .4px;
+}
+#soloItem-title{
+    font-size: 1.06em;
+    /* width: 90%; */
+    line-height:1.38;
+}
+.soloItem-complete-price{
+    display: flex;
+    gap: 10px;
+    font-size: 1.25em;
+    width: fit-content;
+}
+#soloItem-realRupee{
+    font-weight: 600;
+}
+#mrpText{
+    color: grey;
+    font-weight: 500;
+}
+#tax{
+    font-size: .7em;
+    font-weight: normal;
+}
+.soloItem-cancelPrice{
+    display: flex;
+    font-weight: 500;
+}
+#soloItem-cancelRupee{
+    color: grey;
+    text-decoration: line-through;
+    text-decoration-thickness: 1.5px;
+}
+#soloItem-discount{
+    color:#c2410c;
+    font-size: 90%;
+    font-weight: 550;
+    margin-left: 10px;
+}
+/* item description ...................................................................................... */
+.soloItemDescription-BOX{
+    border:1px dashed #171717;
+    padding: 30px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: justify;
+    transition: all .3s ease;
+}
+.soloItemDescriptionHEADING{
+    font-weight: 720;
+    letter-spacing: .7px;
+    margin-bottom: 5px;
+}
+#soloItemDescription-brandName,#soloItemDescription-colour{
+    text-transform: uppercase;
+    font-weight: 580;
+    margin-left: 5px;
+}
+.soloItemDescription-BOX p{
+    font-size: .85em;
+}
+#soloItemDescriptionTEXT{
+    line-height: 1.5;
+    overflow: hidden;
+    transition: all .3s ease-in-out;
+}
+/*  BUTTONS ..................................................... */
+.two-btns{
+    display: flex;
+    gap: 5px;
+}
+.two-btns button{
+    border: none;
+    font-family: var(--standard-Montserratfont);
+    cursor: pointer;
+}
+.two-btns #soloItem-cart-btn{
+    padding: 15px 60px;
+    background-color: #262626;
+    color: #ffffff;
+    font-weight: 550;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 18pc;
+}
+.two-btns #soloItem-buy-btn{
+    padding: 15px 60px;
+    width: 18pc;
+    height: 3.2pc;
+    font-weight: 550;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #262626;
+    background-color: #ffffff;
+    position: relative;
+    z-index: 1;
+    transition: all .3s ease-in-out;
+    overflow: hidden;
+}
+.two-btns #soloItem-buy-btn:hover{
+    color: white;
+}
+.two-btns #soloItem-buy-btn::after{
+    content: '';
+    height: 100%;
+    width:0%;
+    z-index: -1;
+    background-color: #262626;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all .3s ease;
+}
+.two-btns #soloItem-buy-btn:hover::after{
+    width: 100%;
+}
+
+
+
+/* solo css...............................................................................................*/
+#descriptionShowMoreBtn{
+    border: none;
+    font-size: .7em;
+    color: #3882f6;
+    display: inline-block;
+    user-select: none;
+    background-color: transparent;
+    padding: 5px 20px 5px 0;
+    cursor: pointer;
+}
+/* solo shoe CSS */
+.soloShoeImg-Container{
+    width: 500px;
+    height:450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.soloShoeImg-box{
+    width: 95%;
+    height:100%;
+}
+#soloShoe-img{
+    width: 100%;
+    /* height: 100%; */
+}
+#soloItemDescription-BOX-ID{
+    background-color: #e9ecefa3;
+}
+.sizeChart input{
+    display: none;
+}
+.sizeChart label{
+    display: inline-block;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #e9ecefa3;
+    margin: 6px 10px 10px 0 ;
+    border-radius: 4px;
+}
+.sizeChart input:checked + label{
+    background-color: #262626;
+    color: #fff;
+}
+
+/* ...............solo suit css */
+.soloSuitImg-Container{
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.soloSuitImg-box{
+    width: 100%;
+    height:100%;
+}
+#soloSuit-img{
+    min-width: 100%;
+}
+#soloSuitDescription-BOX-ID:hover{
+    background-color: #e9ecefa3;
+}
+.sizeChart input{
+    display: none;
+}
+/* solo saree ......................*/
+.soloSareeImg-Container{
+    width: 500px;
+    height:450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.soloSareeImg-box{
+    width: 95%;
+    height:98%;
+}
+#soloSaree-img{
+    width: 100%;
+    max-height:800px;
+}
+
+/* cart message */
+.cart-msg{
+    background-color: #001d3d;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-family: var(--standard-Montserratfont);
+    font-weight: 500;
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    transition: all .35s ease;
+    z-index: 10;
+}
+.cart-msg-move{
+    top:100px;
+}

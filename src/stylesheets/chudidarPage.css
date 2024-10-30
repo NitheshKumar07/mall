@@ -1,0 +1,48 @@
+.chudidar-main-container{
+    font-family: Moderustic;
+    margin: 0 8px 8px 0;
+}
+.chudidarItemImg-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f3f4;
+    width: 300px;
+    height:320px;
+    overflow: hidden;
+    position: relative;
+
+}
+.chudidarItemImg-box{
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.chudidarItem-img{
+    width: 100%;
+    height:100%;   
+    object-fit: cover;
+    object-position: center;
+    background-color: transparent;
+    mix-blend-mode:multiply;
+    transition: all .3s ease;
+}
+.chudidarItem-name{
+    font-size: 0.97em;
+    color: black;
+    font-weight: 460;
+    width:240px;
+    height:2.8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height :1.35em;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin: 0 9px;
+}

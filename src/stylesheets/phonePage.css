@@ -1,0 +1,129 @@
+.mobileItem-container{
+    display: flex;
+    font-family: Moderustic;
+    margin-bottom: 10px;
+    height: fit-content; 
+    /* new added*/
+}
+.bigRupee{
+    margin-top:4px;
+    height:18px;
+    width:8px;
+    fill: #403d39;
+}
+.smallRupee{
+    height:17px;
+    width:7px;
+    fill:grey;
+}
+.mobileItem-Price,.mobileItem-cancelPrice{
+    display: flex;
+}
+.mobileItemDetails-container .mobileItemPriceDetail{
+    display: flex;
+    gap: 10px;
+}
+.mobileItemImg-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f3f4;
+    width:290px;
+    height:250px;
+    overflow: hidden;
+    position: relative;
+}
+/* .item-main-container .heart{
+    height:20px;
+    width: 20px;
+    position: absolute;
+    top:9px;
+    right:10px;
+    fill: gray;
+    cursor: pointer;
+    transition: .1s ease;
+    z-index: 1;
+}
+.item-main-container .heart:hover{
+    transform: scale(1.1);
+    fill: #e01e37;
+} */
+
+
+.mobileItemImg-box{
+    background: transparent;
+    width: 100%;
+    max-width: 200px;
+    max-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.mobileItem-img{
+    width: 100%;
+    height:100%;   
+    object-fit: cover;
+    object-position: center;
+    background-color: transparent;
+    mix-blend-mode: multiply;
+    transition: all .3s ease;
+}
+.item-main-container .mobileItemDetails-container{
+    width:80%;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    padding: 10px;
+    position: relative;
+    border: 1px solid #f0f3f4;
+    border-left: none;
+}
+/* .mobileItemDetails-container */
+ .phoneItem-name{
+    font-size: 1.2em;
+    color: black;
+    font-weight: 400;
+    width: fit-content;
+    max-width:50%;
+    line-height :1.4em;
+}
+.mobileItemDetails-container #phoneItem-name-ID:hover{
+    color: #bf0603;
+}
+.mobileItem-Price #mobleItem-realprice{
+    font-size:1.68em;
+    font-weight:550;
+}
+.mobileItem-cancelPrice{
+    align-self: self-end;
+}
+.mobileItem-cancelPrice #mobleItem-cancelprice{
+    font-size: 0.8em;
+    text-decoration-line: line-through;
+}
+.mobileItemDetails-container #mobileitem-discount{
+    margin-left: 8px;
+    font-weight: 500;
+}
+.mobileItemDetails-container .items-Cart{
+    width: fit-content;
+    border: none;
+    padding: 8px 12px;
+    border-radius:12px;
+    background-color: #ffd60a;
+    font-family: Moderustic;
+    font-weight:450;
+}
+.mobileItemDetails-container #items-card-ID:hover{
+    background-color: #e9cc39;
+    cursor: pointer;
+}
+#removeCart{
+    color: royalblue;
+    font-size: .85em;
+    cursor: pointer;
+}
+#removeCart:hover{
+    color: red;
+}
