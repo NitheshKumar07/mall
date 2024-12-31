@@ -140,7 +140,7 @@ const NotpointerNoneBlur = () => {
       formDisableStyle();
       signupButtonLoad();
       pointerNoneBlur();
-      axios.post('http://www.localhost:3000/user/signup',formData)
+      axios.post('https://website-api-nu.vercel.app/user/signup',formData)
       .then(res => {
         setTimeout(() => {
         navigate('/login');

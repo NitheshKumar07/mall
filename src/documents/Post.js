@@ -150,7 +150,7 @@ useEffect(() => {
     setButtonLoader();
     setDisabled(true);
     setHasErr(false);    
-    axios.post('http://www.localhost:3000/product',productform,{
+    axios.post('https://website-api-nu.vercel.app/product',productform,{
       headers:{Authorization:'Bearer '+localStorage.getItem("token")}
     })
     .then(res=>

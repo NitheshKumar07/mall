@@ -46,7 +46,7 @@ const watsapp = <svg xmlns="http://www.w3.org/2000/svg" fill=' #25d366' viewBox=
     const params = useParams();
 
     useEffect(()=>{
-        axios.get(`http://www.localhost:3000/product/${params.id}`)
+        axios.get(`https://website-api-nu.vercel.app/product/${params.id}`)
         .then((res=>{
             setSoloLaptopDetails(res.data.product);
         }))
@@ -67,7 +67,7 @@ const watsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(shar
  useEffect(() => {
   // setLoading(true);
   
-  axios.get('http://localhost:3000/product/category/66e863d6e2140616a4dbd9ef')
+  axios.get('https://website-api-nu.vercel.app/product/category/66e863d6e2140616a4dbd9ef')
     .then(res => {
       if (!soloLaptopDetails || !soloLaptopDetails.brandName) {
         return;

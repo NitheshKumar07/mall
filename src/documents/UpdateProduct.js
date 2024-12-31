@@ -44,7 +44,7 @@ const infoSvg = <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0
 
 const params = useParams();
 useEffect(() => {
-    axios.get(`http://www.localhost:3000/product/${params.id}`)
+    axios.get(`https://website-api-nu.vercel.app/product/${params.id}`)
     .then((res=>{
         const product = res.data.product;
         setBrandName(product.brandName);
@@ -164,7 +164,7 @@ useEffect(() => {
     setButtonLoader();
     setDisabled(true);
     setHasErr(false);    
-    axios.put(`http://www.localhost:3000/product/${params.id}`,productform)
+    axios.put(`https://website-api-nu.vercel.app/product/${params.id}`,productform)
     .then(res=>
       {
         if( SelectedCategoryID === '66dde0197a66622cc0734fee'){navigate('/phonepage');}

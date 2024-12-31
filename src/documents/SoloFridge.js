@@ -44,7 +44,7 @@ const SoloFridge = () => {
     const params = useParams();
 
     useEffect(()=>{
-        axios.get(`http://www.localhost:3000/product/${params.id}`)
+        axios.get(`https://website-api-nu.vercel.app/product/${params.id}`)
         .then((res=>{
             setSoloLaptopDetails(res.data.product);
         }))
@@ -60,7 +60,7 @@ const watsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(shar
  useEffect(() => {
   // setLoading(true);
   
-  axios.get('http://localhost:3000/product/category/66e0abb42e6bda2ea8fee819')
+  axios.get('https://website-api-nu.vercel.app/product/category/66e0abb42e6bda2ea8fee819')
     .then(res => {
       if (!soloLaptopDetails || !soloLaptopDetails.brandName) {
         return;

@@ -46,7 +46,7 @@ const SoloHandbag = () => {
     const params = useParams();
 
     useEffect(()=>{
-        axios.get(`http://www.localhost:3000/product/${params.id}`)
+        axios.get(`https://website-api-nu.vercel.app/product/${params.id}`)
         .then((res=>{
             setSoloLaptopDetails(res.data.product);
         }))
@@ -62,7 +62,7 @@ const watsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(shar
  useEffect(() => {
   // setLoading(true);
   
-  axios.get('http://localhost:3000/product/category/66e0ac4a2e6bda2ea8fee81f')
+  axios.get('https://website-api-nu.vercel.app/product/category/66e0ac4a2e6bda2ea8fee81f')
     .then(res => {
       if (!soloLaptopDetails || !soloLaptopDetails.brandName) {
         return;

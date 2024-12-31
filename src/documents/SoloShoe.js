@@ -93,7 +93,7 @@ const SoloShoe = () => {
     const params = useParams();
 
     useEffect(()=>{
-        axios.get(`http://www.localhost:3000/product/${params.id}`)
+        axios.get(`https://website-api-nu.vercel.app/product/${params.id}`)
         .then((res=>{
             setSoloLaptopDetails(res.data.product);
         }))
@@ -108,7 +108,7 @@ const SoloShoe = () => {
   useEffect(() => {
     // setLoading(true);
     
-    axios.get('http://localhost:3000/product/category/66e0ac832e6bda2ea8fee821')
+    axios.get('https://website-api-nu.vercel.app/product/category/66e0ac832e6bda2ea8fee821')
       .then(res => {
         if (!soloLaptopDetails || !soloLaptopDetails.brandName) {
           return;

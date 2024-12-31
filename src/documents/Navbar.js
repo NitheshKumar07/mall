@@ -29,7 +29,7 @@ const Navbar = () => {
 
 // ....women
   useEffect(() => {
-    axios.get('http://localhost:3000/product/category/66e0ac4a2e6bda2ea8fee81f')
+    axios.get('https://website-api-nu.vercel.app/product/category/66e0ac4a2e6bda2ea8fee81f')
     .then((res) => {
       sethandbagBrand([...new Set(
         res.data.product
@@ -40,7 +40,7 @@ const Navbar = () => {
     .catch((err) => err)
   },[])
   useEffect(() => {
-    axios.get('http://localhost:3000/product/category/66e0ac1e2e6bda2ea8fee81d')
+    axios.get('https://website-api-nu.vercel.app/product/category/66e0ac1e2e6bda2ea8fee81d')
     .then((res) => {
       setchudidarBrand([...new Set(
         res.data.product
@@ -51,7 +51,7 @@ const Navbar = () => {
     .catch((err) => err)
   },[])
   useEffect(() => {
-    axios.get('http://localhost:3000/product/category/66de8d5d74a2d32f040c29ba')
+    axios.get('https://website-api-nu.vercel.app/product/category/66de8d5d74a2d32f040c29ba')
     .then((res) => {
       setsareeBrand([...new Set(
         res.data.product
@@ -63,7 +63,7 @@ const Navbar = () => {
   },[])
 //.......men
 useEffect(() => {
-  axios.get('http://localhost:3000/product/category/66e0acbc2e6bda2ea8fee823')
+  axios.get('https://website-api-nu.vercel.app/product/category/66e0acbc2e6bda2ea8fee823')
   .then((res) => {
     setsuitBrand([...new Set(
       res.data.product
@@ -74,7 +74,7 @@ useEffect(() => {
   .catch((err) => err)
 },[])
 useEffect(() => {
-  axios.get('http://localhost:3000/product/category/66e0ace82e6bda2ea8fee825')
+  axios.get('https://website-api-nu.vercel.app/product/category/66e0ace82e6bda2ea8fee825')
   .then((res) => {
     setjeansBrand([...new Set(
       res.data.product
@@ -85,7 +85,7 @@ useEffect(() => {
   .catch((err) => err)
 },[])
 useEffect(() => {
-  axios.get('http://localhost:3000/product/category/66e0ac832e6bda2ea8fee821')
+  axios.get('https://website-api-nu.vercel.app/product/category/66e0ac832e6bda2ea8fee821')
   .then((res) => {
     setshoeBrand([...new Set(
       res.data.product
@@ -97,7 +97,7 @@ useEffect(() => {
 },[])
 // ...watch,mobile,laptop
 useEffect(() => {
-  axios.get('http://localhost:3000/product/category/66e863d6e2140616a4dbd9ef')
+  axios.get('https://website-api-nu.vercel.app/product/category/66e863d6e2140616a4dbd9ef')
   .then((res) => {
     setwatchBrand([...new Set(
       res.data.product
@@ -108,7 +108,7 @@ useEffect(() => {
   .catch((err) => err)
 },[])
 useEffect(() => {
-  axios.get('http://localhost:3000/product/category/66dde0197a66622cc0734fee')
+  axios.get('https://website-api-nu.vercel.app/product/category/66dde0197a66622cc0734fee')
   .then((res) => {
     setmobileBrand([...new Set(
       res.data.product
@@ -119,7 +119,7 @@ useEffect(() => {
   .catch((err) => err)
 },[])
 useEffect(() => {
-  axios.get('http://localhost:3000/product/category/66b7094e89c2a12074133b29')
+  axios.get('https://website-api-nu.vercel.app/product/category/66b7094e89c2a12074133b29')
   .then((res) => {
     setlaptopBrand([...new Set(
       res.data.product
@@ -131,7 +131,7 @@ useEffect(() => {
 },[]) 
 // tv, ac, fridge
 useEffect(() => {
-  axios.get('http://localhost:3000/product/category/66e0ab462e6bda2ea8fee817')
+  axios.get('https://website-api-nu.vercel.app/product/category/66e0ab462e6bda2ea8fee817')
   .then((res) => {
     settvBrand([...new Set(
       res.data.product
@@ -142,7 +142,7 @@ useEffect(() => {
   .catch((err) => err)
 },[])
 useEffect(() => {
-  axios.get('http://localhost:3000/product/category/66e0ab0a2e6bda2ea8fee815')
+  axios.get('https://website-api-nu.vercel.app/product/category/66e0ab0a2e6bda2ea8fee815')
   .then((res) => {
     setacBrand([...new Set(
       res.data.product
@@ -153,7 +153,7 @@ useEffect(() => {
   .catch((err) => err)
 },[])
 useEffect(() => {
-  axios.get('http://localhost:3000/product/category/66e0abb42e6bda2ea8fee819')
+  axios.get('https://website-api-nu.vercel.app/product/category/66e0abb42e6bda2ea8fee819')
   .then((res) => {
     setfridgeBrand([...new Set(
       res.data.product
