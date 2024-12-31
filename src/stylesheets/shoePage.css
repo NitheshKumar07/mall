@@ -7,17 +7,15 @@
     height:auto;
     overflow: hidden;
     position: relative;
+    border-radius: 10px;
 
 }
 .shoeItemImg-box{
     background: transparent;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    width:310px;
-    height:310px;
     align-items: center;
 }
 .shoeItem-img{

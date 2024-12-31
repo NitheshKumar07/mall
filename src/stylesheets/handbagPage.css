@@ -2,18 +2,18 @@
     display: flex;
     gap:70px;
     padding: 20px;
+    padding-bottom: 0;
     /* flex-wrap: wrap; */
     box-sizing: border-box;
 }
 .super-box{
     display: flex;
-    /* justify-content: space-evenly; */
     flex-wrap: wrap;
-    /* width:70%; */
+    transition: filter .3s ease;
 }
 .handbag-main-container{
+    padding-bottom: 1.2pc;
     font-family: Moderustic;
-    margin: 0 8px 8px 0;
 }
 
 .handbagItemImg-container{
@@ -67,10 +67,15 @@
 }
 .handbagItem-Price,.handbagItem-cancelPrice{
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .handbagItemDetails-container .handbagItemPriceDetail{
     display: flex;
+    flex-direction: column;
     gap: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .heart{
@@ -101,19 +106,13 @@
     transition: all .3s ease;
 }
 .handbagItemDetails-container{
-    /* width:80%; */
     width: auto;
-    /* height: 250px; */
-    /* min-height: 210px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 12px;
-    /* padding: 10px; */
+    gap: 8px;
     position: relative;
-    border: 1px solid  #f0f3f4;
-    border-left: none;
 }
 .handbagItem-name{
     font-size: 0.97em;
@@ -134,7 +133,6 @@
     color: #bf0603;
 }
 .handbagItem-Price #mobleItem-realprice{
-    font-size:1.5em;
     font-weight:550;
 }
 .handbagItem-cancelPrice{
@@ -149,10 +147,8 @@
     font-weight: 500;
 }
 .handbagItemDetails-container .items-Cart{
-    width: 130px;
-    height: 35px;
     border: none;
-    padding: 8px 12px;
+    /* padding: 8px 12px; */
     border-radius:12px;
     background-color: #002626;
     color: #fff;
@@ -172,6 +168,7 @@
 }
 #brandName{
     font-family:Moderustic;
+    text-transform: uppercase;
     font-weight: 700;
     margin-top: 10px;
 }
@@ -182,9 +179,7 @@
 }
 #updateItem,#deleteItem{
     font-family:Montserrat ;
-    font-size: 1em;
     border: navajowhite;
-    padding: 2.5% 15%;
     cursor: pointer;
 }
 #updateItem:hover,#deleteItem:hover{

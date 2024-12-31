@@ -2,19 +2,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Protest+Revolution&display=swap');
 
 
+
+.niteshLogo{
+    width: 4pc;
+    /* height: 100%; */
+    border: 2px solid green;
+}
+.niteshLogo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.4);
+}
 .homepageMargin{
     margin: 6.5% 5.7%;
     margin-bottom: 0;
+    min-height: 100vh;
 }
 .allmargin{
     width: 90%;
     margin: 5% auto;
-    /* background-color: green; */
+    min-height: 100vh;
 }
 .defaultmargin{
     margin: 5% 0 0 0%;
+    min-height: 100vh;
     /* background-color: green; */
 }
 #loadingProducts{
@@ -45,15 +62,25 @@ button{
     
 }
 body::-webkit-scrollbar{
-    display: none;
+    /* display: none; */
+    width: .4pc;
+}
+body::-webkit-scrollbar-track{
+    background-color: lightgrey;
+}
+body::-webkit-scrollbar-thumb{
+    /* width: 30%; */
+    height: 20%;
+    background-color: black;
+    border-radius: 10px;
 }
 body{
-    -ms-overflow-style: none;
-    transition: backgrond;
+    /* -ms-overflow-style: none;
+    transition: backgrond; */
 }
 @-moz-document url-prefix() {
     body {
-        scrollbar-width: none;
+        /* scrollbar-width: none; */
     }
 }
 /* ........................................................................... */
@@ -77,7 +104,7 @@ body{
 }
 .nav-bar{
     width: 100%;
-    height:90px;
+    height: 85px;
     display: flex;
     align-items:center;
     font-weight:bolder;
@@ -94,32 +121,129 @@ body{
     color: #0088ff;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-.category 
-{
-    align-items: center;
+.category {
     display: flex;
     justify-content: space-evenly;
-    gap: 20px;
+    align-items: end;
+    margin-top: 2.2pc;
+    position: relative;
 }
 
-.category a
-{
-    color: black;
+
+.category button{
     text-transform: uppercase;
-    border-bottom: 2px solid transparent;
-    /* background-color: lightblue; */
-    padding:8px ;
-    /* border-radius: 8px; */
     transition: all .2s ease-in;
-    font-size: 0.87em;
+    background-color: transparent;
+    border: none;
+    font-size: .9em;
+    padding: 0 20px;
+    padding-bottom: 1.8pc;
+    margin: auto;
+    font-family: kanit;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    z-index: 99;
 }
-.cat-a:hover{
-    /* transform:scaleX(0.9); */
-    /* color:white; */
-    /* background-color: black; */
-    /* border-radius: 8px; */
-    border-bottom: 2px solid rgb(237, 0, 118);
+.category button:hover{
+    border-bottom: 2px solid red;
 }
+.category-subCont{
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+.fullCat-container.showLinks{
+    display: block;
+}
+.fullCat-container{
+    position: absolute;
+    top: 3.2pc;
+    left: -25pc;
+    display: flex;
+    justify-content: center;
+    font-family: kanit;
+    z-index: 98;
+    transition: all 1s ease;
+    width:90pc ;
+    height: 55vh;
+    display: none;
+    background: url('../assests/wallbg.jpg') right/cover;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.watchimage{
+    background: url('../assests/watchbanner.webp') right/cover;
+}
+.shoeImage{
+    background: url('../assests/menWall.webp') left/cover;
+}
+.bagImage{
+    background: url('../assests/womenwall.png') center/cover no-repeat;
+}
+.laptopImage{
+    background: url('../assests/laptopwallpaper.webp') center/cover;
+}
+.tvImage{
+    background: url('../assests/acwallpaper.jpg') top/cover no-repeat;
+}
+
+.fullCat-box{
+    display: flex;
+    margin: 1pc 15pc 10pc 15pc;
+    gap: 10pc;
+}
+.fullBox-cat{
+    display: flex;
+    flex-direction: column;
+    gap: .5pc;
+
+}
+.fullCat-head{
+    text-transform: uppercase;
+    font-weight: 650;
+    letter-spacing: 1px;
+    cursor: pointer;
+    padding-bottom: .3pc;
+    font-family: var(--standard-Montserratfont);
+    border-bottom: 1px solid orange;
+}
+.catUL{
+    display: flex;
+    flex-direction: column;
+    gap: .3pc;
+    max-height: 22pc;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.catUL::-webkit-scrollbar{
+    width: 4px;
+}
+.catUL::-webkit-scrollbar-track{
+    background-color: #ced4da;
+}
+.catUL::-webkit-scrollbar-thumb{
+    background-color: #495057;
+}
+.fullCat-container a{
+    list-style: none;
+    font-size: .98em !important;
+    font-weight: 300;
+    text-transform: capitalize;
+    min-width: 12pc;
+    max-width: 18px;
+    cursor: pointer;
+    transition: transform .2s linear;
+    color: black;
+    padding:0px 0 !important;
+}
+.fullCat-container a:hover{
+    transform: translateX(5px);
+    color: orange !important;
+}
+
+
 .search-bar{
     display: flex;
     width:30%;    
@@ -155,11 +279,11 @@ body{
     padding: 0px 10px ;
 }
 .icon:hover svg{
-    transform: scale(1.2);
+    /* transform: scale(1.2); */
 }
 .icon:hover #cartCount{
-    transform: scale(0.9);
-    transition: .3s ease-out;
+    /* transform: scale(0.9);
+    transition: .3s ease-out; */
 
 }
 .icons svg{
@@ -183,7 +307,7 @@ body{
     flex-direction: column;
     align-items: flex-start;
     position: absolute;
-    top: 60px;
+    top: 52px;
     left: -30px;
     min-width: 100px;
     visibility: hidden;
@@ -221,8 +345,8 @@ body{
     background-color:#e7ecef;
     position: fixed;
     left:-340px;
-    width: 340px;
-    /* height:100%; */
+    /* width: 340px; */
+    height:100%;
     transition: 0.3s ease;
 }
 .cancel-content{
@@ -306,16 +430,6 @@ body{
 #sideBar:checked ~ .menuBar #arrowMark{
     margin-left: 97%;
 }
-.cancel-content .menubar-signout-btn::after{
-    content: '';
-    position: absolute;
-    top: -15px;
-    left: 0;
-    width:100%;
-    height:1px;
-    border-radius: 4px;
-    background-color: black;
-}
 .cancel-content .menubar-signout-btn{
     font-size: var(--standard-font-size);
     position: relative;
@@ -323,12 +437,10 @@ body{
     background-color: #e0e1dd;
     cursor: pointer;
     border:2px solid transparent;
-    margin-top:110%;
+    font-family: var(--standard-Montserratfont);
 }
 .sideBarBody{
     position: relative;
-    /* top: 90px; */
-    top: 12px;
     z-index: 90;
 }
 .sideBarBody label{
@@ -351,7 +463,7 @@ body{
   #menuCancelIcon{
     position:absolute;
     top: 12px;
-    left: -290px; 
+    left: -250px; 
     background: var(--standard-forDark-color);
     fill: var(--standard-color);
     border-radius: 50%;
@@ -359,6 +471,9 @@ body{
     z-index: 99;
     transition:all .3s ease; 
 }
+body.no-scroll {
+    overflow: hidden;
+  }
 #sideBar:checked ~ .menuBar {
     z-index: 98;
     left: 0px;
@@ -389,22 +504,21 @@ body{
 .imageSlide{
     position: relative;
     width: 100%;
-    height: 570px;
     overflow: hidden;
     transition: all 0.5s ease-in-out;
 }
-.imageSlide img{
+.imageSlide-image{
     position: absolute;
     width:100%;
-    max-height: 100%;
     transition: transform 0.8s ease-in-out;
+    object-fit: cover;
+    object-position:center;
 }
 .slide-btn{
-    /* padding: 15px 10px; */
-    height:80%;
-    width: 60px;
+    height: 100%;
+    width: 15vw;
     border-radius: 4px;
-    font-size: 2.2rem;
+    font-size: 1.4rem;
     border: 2px solid transparent;
     position: absolute;    
     background-color: transparent;
@@ -419,7 +533,6 @@ body{
     right: 2px;
 }
 .slide-btn:hover{
-    border: 2px solid black;
     opacity: 1;
     color: black;
 }
@@ -491,9 +604,9 @@ body{
     mix-blend-mode:darken;
  }
  .carousel-image .all-carousel-images-cont{
-    background-color: lightblue;
-    height:220px;
-    width: 310px;    
+    /* background-color: lightblue; */
+    height:200px;
+    width: 300px;   
 }
 .all-carousel-images-cont .allcarouselImages{
     height: 100%;
@@ -520,8 +633,6 @@ body{
     width: 90%;
     transform: translateX(-50%);
     bottom:-10px;
-    font-size: 1.1em;
-    padding:8px 0;
     border: var(--standard-border);
     opacity:0;
     transition: 0.4s ease;
@@ -544,7 +655,6 @@ body{
     width: 100%;
 }
 .carousel-content #prod-name{
-    font-size: 1.24rem;
     text-transform: capitalize;
     font-weight: 450;
     font-family: Kanit;
@@ -554,6 +664,7 @@ body{
     text-overflow: ellipsis;
     white-space: nowrap;
     cursor: pointer;
+    color: #333;
 }
 #carousel-content-svg{
     height:16px;
@@ -561,7 +672,8 @@ body{
     margin-bottom: -2px;
 }
 .carousel-content price{
-    font-size:1.1em ;
+    /* font-size:1.1em ; */
+    color: #333;
     font-family: kanit;
     font-weight: 500;
 }
@@ -590,11 +702,10 @@ body{
     padding: 20px 15px;
     font-family: roboto;
     display: flex;
-    /* justify-content: space-evenly; */
+    justify-content: space-around;
     align-items: center;
     gap: 20px;
     background: linear-gradient(to bottom,#e9ecef,#edede9,#f8f9fa);
-    /* flex-wrap: wrap; */
 }
 .cards-box-container .mobile-box-container{
     display: flex;
@@ -655,7 +766,6 @@ body{
 }
 .cards-box-container  .watch-gaming-box-container{
     background-color: white;
-    display: flex;
     flex-direction: column;
     height:28pc;
     padding: 20px 30px 25px 20px;
@@ -668,6 +778,9 @@ body{
 .cards-box-container .tv-box-container{
     background-color: white;
     padding: 20px 30px 25px 20px;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
 }
 .tv-box-container .tv-ac-container{
     display: flex;
@@ -690,13 +803,6 @@ body{
 }
 .ac-img #ac-card-img:hover{
     transform: scale(1.06);
-}
-.cards-box-container .tv-box-container{
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 480px;
-    overflow: hidden;
 }
 .tv-box-container .container-sub2{
     display: flex;
@@ -856,7 +962,7 @@ body{
        flex: 0 0 auto;
        scroll-snap-align: start;
 }
-.mens-shopping-container #add-cart-btn{
+/* .mens-shopping-container #add-cart-btn{
     position: absolute;
     left: 50%;
     width: 90%;
@@ -879,7 +985,7 @@ body{
 .mens-shopping-container #add-cart-btn:hover{
     color:var(--standard-color);
     background-color: #1e88e5;
-}
+} */
 
 .mens-shopping-container .shoe-bag-main-container{
     opacity: 0;
@@ -1045,8 +1151,17 @@ body{
     object-fit: cover;
     object-position:center;
 }
+@media screen and (min-width : 1025px) {
 
-@media screen and (min-width : 1024px) {
+    .post-Container{
+        padding: 2pc 3pc;
+    }
+    .slider-container{
+        padding:2pc 1pc;
+    }
+    .sideBarBody{
+        display: none;
+    }
     .cart-heading{
         gap: 93px;
     }
@@ -1055,6 +1170,7 @@ body{
     }
     .cart-main-container{
         gap: 30px;
+        width: fit-content;
     }
     .order-sub-container{
         gap: 8px;
@@ -1062,10 +1178,463 @@ body{
     .order-sub-container div{
         gap: 80px;
     }
+    .linktitle h3{
+        font-size: 2.6rem;
+    }
+    .linktitle p{
+        width: 80%;
+        font-size: 1.8em;
+    }
+    .btnarrow-move button{    
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+    .arrowLinkSVG{
+        height:30px;
+        width: 30px;
+    }
+    .btnarrow-move{
+        gap: 22px;
+        padding: 9px 20px;
+    }
+
+    .womensfashionsubContainer{
+        gap:50px;
+    }
+    .womensfashionsubContainerIMG{
+        height:35pc;
+    }
+    .womensfashionsubContainerIMG img{
+        border-radius: 10%;
+        height:100%;
+    }
+    .moveIMG{
+        width: 35%;
+        background-size: 100% 100%;
+    }
+    .image-container p, .image-container1 p{
+        font-size: 1.7em;
+    }
+    .slider-images{
+        width: 110px;
+    }
+    .slder-subContainer{
+        gap: 21px;
+        height: 720px;
+    }
+    .slider-images:first-child, .slider-images:last-child{
+        height: 480px;
+    }
+    .slider-images:nth-child(2), .slider-images:nth-child(6){
+        height: 560px;
+    }
+    .slider-images:nth-child(3), .slider-images:nth-child(4), .slider-images:nth-child(5){
+        height: 665px;
+    }
+    .slider-images.activeImg{
+        width: 740px;
+        height: 720px;
+    }
+    .slider-container h4{
+        font-size: 2.5em;
+        top: 50%;
+        left: -10%;
+    }
+    #h4handbag, #h4suit{
+        font-size:2.5pc;
+    }
+    #handbagBanner{
+        width: 99.2%;
+    }
+    #sareeBanner{
+        width: 99%;
+    }
+    #watchBanner{
+        width: 83%;
+    }
+    #phoneBanner{
+        width: 77%;
+    }
+    #fridgeBanner{
+        width: 92%;
+    }
+    #acBanner{
+        width: 83%;
+    }
+    #shoeBanner{
+        width:88.5%;
+    }
+    #jeansBanner{
+        width:91.5%;
+    }
+    .tvBannerDiv p{
+        font-size: 2.2pc;
+        right: 30%;
+    }
+    .tvBannerDiv p::before, .laptopBannerDiv p::before{
+        height:3pc;
+    }
+    .laptopBannerDiv p{
+        font-size: 2.2pc;
+        left: 15%;
+    }
+    .lahengaSuitItemImg-container{
+        width: 320px;
+        height:440px;
+    }
+    .chudidarItem-name{
+        font-size: 0.97em;
+        width:240px;
+    }
+    #updateItem,#deleteItem{
+        font-size: 1em;
+        padding: 2.5% 15%;
+    }
+    .orderContainer{
+        width: 400px;
+    }
+    .super-boxChudidar{
+        width: 78%;
+    }
+    .handbagItemDetails-container{
+        width: auto;
+    }
+    .chudidar-main-container, .handbag-main-container{
+        margin: 0 8px 8px 0;
+    }
+    .handbagItemDetails-container .items-Cart{
+        width: 130px;
+        height: 35px;
+    }
+    .sareeItemImg-container{
+        height:500px;
+        max-width: 320px;
+    }
+    .suitItemImg-container{
+        height:400px;
+        width: 320px;
+    }
+    .shoeItemImg-box{
+        width:310px;
+        height:310px;
+    }   
+    .jeansItemImg-container{
+        width: 320px;
+        height:400px;
+    }
+    .watchItemImg-container{
+        width:290px;
+        height:290px;    
+    }
+    .mobileItemImg-container{
+        width:250px;
+        height:250px;
+    }
+
+
+    .cart-address{
+        width: 590px;
+        margin-top: 45px;
+    }
+    .paymentContainer{
+       margin-top: 45px;
+    }
+    #wish-title{
+        width:30pc;
+    }
+    .cart-img{
+        height:130px;
+        width: 130px;
+    }
+    .quantity-cart{
+        padding: 3px 15px;
+        width: 25px;
+    }
+    .cart-sub-containerMAX{
+        display: flex;
+    }
+    .cart-sub-containerMINI{
+        display: none;
+    }
+    .soloLaptop-details-decription-container{
+        gap: 10px;
+        width: 50%;
+    }
+    .solomyLaptopImg-Container{
+        width: 500px;
+    }
+    #soloItem-title{
+        font-size: 1.03em;
+    }
+    .Solosvg1 p{
+        font-size: .8rem;
+    }
+    #soloItemDescriptionTEXT{
+        font-size: .99em;
+        line-height: 1.5;
+    }
+    .two-btns #soloItem-buy-btn, .two-btns #soloItem-cart-btn{
+        width: 18pc;
+    }
+    .solojeansImg-Container{
+        width: 500px
+    }
+    .soloShoeImg-Container{
+        width: 500px;
+        height:450px;
+    }
+    .soloSuitImg-Container{
+        width: 500px;
+    }
+    .soloSuitImg-box{
+        width: 100%;
+        height:100%;
+    }
+    .lghtwgt p {
+        font-size: small;
+    }
+    .payDivCart{
+        display: none;
+    }
+
+    .womensfashionContainer{
+        gap: 2pc;
+    }
+    #nikeColl{
+        font-size: 3em;
+    }
+    #nikeColl::before{
+        width: 15pc;
+        left: -16pc;
+    }
+    #nikeColl::after{
+        width: 15pc;
+        right: -16pc;
+    }
+    .imgforMINI{
+        display: none;
+    }
+    .imgforMid{
+        display: none;
+    }
+    .imgforMAX{
+        display: block;
+    }
+    #succ{
+        font-size: 2rem;
+    }
+    #reachingYou{
+        font-size: 1.3rem;
+    }
+    .placedbutton{
+        font-size: 1.2rem;
+        padding: 8px 28px;
+    }
+    #conShop, .startshop{
+        padding: 12px 40px;
+        font-size: 1em;
+    }
+    .loginComponent{
+        position: absolute;
+        top: 50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+    }
+    .tv-box-container{
+        display: flex;
+    }
+    .watch-gaming-box-container{
+        display: flex;
+    }
+    .imageSlide-image{
+        height: 100%;
+    }
+    .imageSlide{
+        height:26.5pc;
+    }
+    .copywright{
+        font-size: .85rem;
+    }
+    .footer-sec-4 p{
+        font-size: .88rem;
+    }
+    .cart-msg{
+        transform: translateX( -50%);
+    }
+    .cart-msg{
+        padding: 10px 30px;
+    }
+    .carousel-image #add-cart-btn{
+        font-size: 1.1em;
+        padding:8px 0;
+    }
+    .mobileItemImg-box{
+        max-width: 200px;
+        max-height: 500px;
+    }
+    .laptopItem-img{
+        transform: scale(1.05);
+    }
+    .handbagItem-Price #mobleItem-realprice{
+        font-size:1.5em;
+    }
+    .cards-box-container .tv-box-container{
+        min-width: 330px;
+    }
+    .svgfilterDiv{
+        display: none;
+    }
+    .filter-container{
+        display:flex;
+        position: sticky;
+        top: 0px;
+        gap: 30px;
+    }
+    .filter-checkboxes label{
+        font-size: .78rem;
+    }
+    #filter{
+        font-size: 1.2rem;
+    }
+    .filter-checkbox{
+        gap: 17px; 
+    }
+    .filter-brandBtn-arrow-container p{
+        font-size: 1.1rem;
+    }    
+    .filter-container2{
+        display: none;
+    }
+    .bagmoveImgMain-container{
+        width: 17pc;
+    }
+    .moveIMG{
+        min-width: 30pc;
+    }
+
+}
+@media (min-width:1025px) and (max-width: 1700px){
+    .allmargin{
+        width: 90;
+        margin: 8% auto;
+    }
+}
+@media (min-width:1025px) and (max-width: 1400px){
+    .womensfashionsubContainer{
+        gap: 3pc;
+    }
+    .LEFTmARGIN{
+        margin-left: -10%;
+    }
+    .womensfashionsubContainerIMG{
+        height: 26pc;
+    }
+        .linktitle h3{
+            /* font-size: 1.6em; */
+        }
+        .linktitle p{
+            font-size: 1.5em;
+            width: 100%;
+        }
+        .btnarrow-move button{    
+            font-size: .97em;
+            letter-spacing: 1px;
+        }
+        .arrowLinkSVG{
+            height:24px;
+            width: 24px;
+        }
+        .btnarrow-move{
+            gap:15px;
+            padding: 8px 18px;
+        }
+        .sareeFlow img{
+            max-height: 24pc;
+        }
+        .moveIMG{
+            min-width: 22pc;
+            max-width: 23pc;
+            max-height: 25pc;
+        }
+        .manysareeContainer{
+            max-height: 32pc;            
+        }
+
+        .slider-images{
+            width: 80px;
+        }
+        .slder-subContainer{
+            gap: 11px;
+            height: 500px;
+        }
+        .slider-images:first-child, .slider-images:last-child{
+            height: 250px;
+        }
+        .slider-images:nth-child(2), .slider-images:nth-child(6){
+            height: 300px;
+        }
+        .slider-images:nth-child(3), .slider-images:nth-child(4), .slider-images:nth-child(5){
+            height: 365px;
+        }
+        .slider-images.activeImg{
+            width: 550px;
+            height:650px;
+        }
+        .slider-container h4{
+            font-size:1.9em;
+            top: 50%;
+            left: -10%;
+        }
+}
+@media (min-width:1025px) and (max-width: 1100px){
+    .orderContainer{
+    width: 400px;
+    }
+    .cart-main-container{
+        gap: 20px;
+    }
+    .cart-heading{
+        gap: 80px;
+    }
+    .cart-main-div,.wish-main-div{
+        gap: 32px;
+    }
+}
+@media (min-width:770px) and (max-width: 1024px){
+
+    .loginComponent{
+        position: absolute;
+        top: 50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+    }
 }
 @media screen and (max-width : 1024px) {
+    .lghtwgt p {
+        font-size: small;
+    }
+    .imageSlide-image{
+        height: 100%;
+    }
+    .carousel-image #add-cart-btn{
+        font-size: 1.1em;
+        padding:8px 0;
+    }
+    .cart-msg{
+        transform: translateX( -50%);
+    }
+    .cart-msg{
+        padding: 10px 30px;
+    }
+    #conShop, .startshop{
+        padding: 12px 40px;
+        font-size: 1em;
+    }
     #mall-logo{
         font-size: 1.95rem;
+    }
+    .sideBarBody{
+        display: none;
     }
     .mens-shopping-container .bag-main-container
     {
@@ -1139,17 +1708,12 @@ body{
     .allmargin{
         width: 94%;
         margin: 8.5% auto;
-        /* background-color: green; */
     }
     .defaultmargin{
         margin: 9.5% 0 0 0%;
-        /* background-color: green; */
     }
     .cart-main-container{
         gap: 20px;
-    }
-    .orderContainer{
-        width: 100%;
     }
     .order-sub-container{
         gap: 10px;
@@ -1163,13 +1727,486 @@ body{
     .cart-main-div,.wish-main-div{
         gap: 32px;
     }
+    .womensfashionsubContainerIMG{
+        height:28pc;
+    }
+    .linktitle p{
+        font-size: 1.4em;
+    }
+    .moveIMG{
+        width: 80%;
+    }
+    .LEFTmARGIN{
+        margin-left: -10%;
+    }
+    .image-container p, .image-container1 p{
+        font-size: 1.5em;
+    }
+    .bagImage{
+        background: url('../assests/womenwall.png') center/contain no-repeat;
+    }
+    .laptopImage{
+        background: url('../assests/laptopwallpaper.webp') center/contain no-repeat;
+    }
+    .slider-images{
+        width: 80px;
+    }
+    .slder-subContainer{
+        gap: 11px;
+        height: 420px;
+    }
+    .slider-images:first-child, .slider-images:last-child{
+        height: 250px;
+    }
+    .slider-images:nth-child(2), .slider-images:nth-child(6){
+        height: 300px;
+    }
+    .slider-images:nth-child(3), .slider-images:nth-child(4), .slider-images:nth-child(5){
+        height: 365px;
+    }
+    .slider-images.activeImg{
+        width: 440px;
+        height:420px;
+    }
+    .slider-container h4{
+        font-size:1.8em;
+        top: 50%;
+        left: -10%;
+    }
+    #h4handbag, #h4suit{
+        font-size:2.2pc;
+    }
+    #handbagBanner, #sareeBanner{
+        width: 98%;
+    }
+    #jeansBanner{
+        width:98%;
+    }
+    #watchBanner{
+        width: 90%;
+    }
+    #phoneBanner{
+        width: 110%;
+    }
+    #acBanner{
+        width: 89%;
+        min-height: 13pc;
+    }
+    #fridgeBanner{
+        width: 77%;
+        min-height: 11pc;
+    }
+    #shoeBanner{
+        width:95%;
+    }
+    .tvBannerDiv p{
+        font-size: 1.4pc;
+        right: 20%;
+    }
+    .tvBannerDiv p::before, .laptopBannerDiv p::before{
+        height:2pc;
+    }
+    .laptopBannerDiv p{
+        font-size: 1.4pc;
+    }
+    .orderContainer{
+        width: 400px;
+    }
+    .lahengaSuitItemImg-container{
+        width: 320px;
+        height:440px;
+    }
+    .chudidarItem-name{
+        font-size: 0.97em;
+        width:240px;
+    }
+    #updateItem,#deleteItem{
+        font-size: 1em;
+        padding: 2.5% 15%;
+    }
+    .super-boxChudidar{
+        width: 100%;
+    }
+    .handbagItemDetails-container{
+        width: auto;
+    }
+    .chudidar-main-container, .handbag-main-container{
+        margin: 0 8px 8px 0;
+    }
+    .handbagItemDetails-container .items-Cart{
+        width: 130px;
+        height: 35px;
+    }
+    .sareeItemImg-container{
+    width: 320px;
+    height:500px;
+    }
+    .suitItemImg-container{
+        height:400px;
+        width: 320px;
+    }
+    .shoeItemImg-box{
+    width:310px;
+    height:310px;
+    }
+    .jeansItemImg-container{
+        width: 320px;
+        height:400px;
+    }
+    .watchItemImg-container{
+        width:290px;
+        height:290px;    
+    }
+    .mobileItemImg-container{
+        width:240px;
+        height:290px;
+    }
+    .mobileItemImg-box{
+        max-width: 220px;
+        max-height: 290px;
+    }
+
+
+
+    .cart-address{
+        width: 590px;
+        margin-top: 45px;
+    }
+    .paymentContainer{
+        margin-top: 45px;
+    }
+    #wish-title{
+        width:30pc;
+    }
+    .cart-img{
+        height:130px;
+        width: 130px;
+    }
+    .quantity-cart{
+        padding: 3px 15px;
+        width: 25px;
+    }
+    .cart-sub-containerMAX{
+        display: flex;
+    }
+    .cart-sub-containerMINI{
+        display: none;
+    }
+    .soloLaptop-details-decription-container{
+        gap: 10px;
+        width: 50%;
+    }
+    .solomyLaptopImg-Container{
+        width: 500px;
+    }
+    #soloItem-title{
+        font-size: 1em;
+    }
+    .Solosvg1 p{
+        font-size: .8rem;
+    }    
+    #soloItemDescriptionTEXT{
+        font-size: .99em;
+        line-height: 1.5;
+    }
+    .two-btns #soloItem-buy-btn, .two-btns #soloItem-cart-btn{
+        width: 50%;
+    }
+    .solojeansImg-Container{
+        width: 500px
+    }
+    .soloShoeImg-Container{
+        width: 500px;
+        height:450px;
+    }
+    .soloSuitImg-Container{
+        width: 500px;
+    }
+    .soloSuitImg-box{
+        width: 100%;
+        height:100%;
+    }
+    .payDivCart{
+        display: none;
+    }
+    .manysareeContainer{
+        display: flex;
+        flex-direction: column;
+    }
+    .manysaree1{
+        width:99%;
+    }
+    .womensfashionsubContainer{
+        gap: 40px;
+    }
+    .imgforMAX{
+        display: none;
+    }
+    .imgforMINI{
+        display: none;
+    }
+    .imgforMid{
+        display: block;
+    }
+    .watch-gaming-box-container{
+        display: none
+    }
+    .imageSlide{
+        height:20.5pc;
+    }
+    .cards-box-container .tv-box-container{
+        width: 480px;
+    }
+    .svgfilterDiv{
+        display: none;
+    }
+    .filter-container{
+        display:flex;
+        position: sticky;
+        top: 0px;
+        gap: 30px;
+    }
+    .filter-checkboxes label{
+        font-size: .78rem;
+    }    
+    #filter{
+        font-size: 1.2rem;
+    }
+    .filter-checkbox{
+        gap: 17px; 
+    }
+    .filter-brandBtn-arrow-container p{
+        font-size: 1.1rem;
+    }
+    .filter-container2{
+        display: none;
+    }
+    .bagmoveImgMain-container{
+        width: 17pc;
+    }
+    #nikeColl{
+        font-size: 2.3em;
+    }
+    #nikeColl::before{
+        width: 15pc;
+        left: -16pc;
+    }
+    #nikeColl::after{
+        width: 15pc;
+        right: -16pc;
+    }
+    .footer-sec-4 p{
+        font-size: .82rem;
+    }
+    .footer-sec-4 h4{
+        font-size: 1em;
+    }
+    .copywright{
+        font-size: .9em;
+    }
+}
+@media (min-width:501px) and (max-width: 799px){
+    .category{
+        display: none;
+    }
+    .sideBarBody{
+        display: block;
+        left: -2pc;
+    }
+    .menuBar{
+        width:300px;
+        font-size:0.87em;
+    }
+    .filter-container1{
+        display: none;
+    }
+    .filter-container2{
+        display: block;
+    }
+    .svgfilterDiv{
+        display: block;
+    }
+    .slider-images{
+        width: 10%;
+    }
+    .slder-subContainer{
+        gap: 5px;
+        height: 420px;
+    }
+    .slider-images:first-child, .slider-images:last-child{
+        height: 200px;
+    }
+    .slider-images:nth-child(2), .slider-images:nth-child(6){
+        height: 260px;
+    }
+    .slider-images:nth-child(3), .slider-images:nth-child(4), .slider-images:nth-child(5){
+        height: 305px;
+    }
+    .slider-images.activeImg{
+        width: 350px;
+        height:340px;
+    }
+    .slider-container h4{
+        font-size:1.5em;
+        top: 50%;
+        left: -10%;
+    }
+}
+@media (min-width:501px) and (max-width: 850px){
+    .soloShoeImg-Container{
+        width: auto;
+        height:auto;
+    }
+    .soloLaptop-Container, .soloSuit-Container{
+        flex-direction: column;
+        margin-top: 6pc;
+        justify-content: center;
+    }
+    .soloLaptop-details-decription-container{
+        gap: .5pc;
+        width: 100%;
+        padding:0 1pc;
+    }
+    .lghtwgt p{
+        font-size: .7rem;
+        color: grey;
+    }
 }
 
-@media screen and (max-width: 480px){
+
+@media (min-width:501px) and (max-width: 1020px){
+    .filter-container1{
+        display: none;
+    }
+    .filter-container2{
+        display: block;
+    }
+    .svgfilterDiv{
+        display: block;
+    }
+}
+@media (min-width:501px) and (max-width: 1024px){
+    .womensfashionsubContainerIMG img{
+        max-height: 25pc;
+    }
+    .sareeFlow img{
+        max-height: 22pc;
+    }
+    .moveIMG{
+        min-width: 22pc;
+        max-width: 23pc;
+        max-height: 23pc;
+    }
+    .linktitle h3{
+        font-size: 2.2rem;
+    }
+    .linktitle p{
+        width: 90%;
+    }
+    .btnarrow-move button{    
+        font-size: .8em;
+        letter-spacing: .8px;
+    }
+    .arrowLinkSVG{
+        height:20px;
+        width: 20px;
+    }
+    .btnarrow-move{
+        gap:15px;
+        padding: 6px 18px;
+    }
+    #succ{
+        font-size: 1.5rem;
+    }
+    #reachingYou{
+        font-size: 1.08rem;
+    }
+    .placedbutton{
+        font-size: 1rem;
+        padding: 5px 18px;
+    }
+
+}
+@media (min-width:501px) and (max-width: 900px){
+.cart-main-container{
+    flex-wrap: wrap;
+}
+}
+@media (min-width:800px) and (max-width: 1023px){
+    .fullCat-box{
+        gap: .2pc;
+        justify-content: space-evenly;
+    }
+    .fullCat-container a{
+        min-width: 8pc;
+    }   
+}
+@media screen and (max-width: 768px){
+    #eye{
+        transform: translateX(2pc);
+    }
+    .loginComponent{
+        padding: 50% 0;
+    }
+}
+@media screen and (min-width: 501px){  
+    #simProd{
+        font-size: 2em;
+      }
+}
+@media screen and (max-width: 640px){
+    .phoneItem-name{
+        width:100%; /* Set the width of the container */
+}
+}
+@media (min-width:601px) and (max-width: 760px){
+    .sideBarBody{
+        top: 18px;
+    }    
+}
+@media (min-width:501px) and (max-width: 600px){
+    .sideBarBody{
+        top: 30px;
+    } 
+    .imageSlide-image{
+        height: 100%;
+    }
+}
+@media screen and (max-width: 500px){ 
+    .sideBarBody{
+        top: 12px;
+    }    
+    .infosvgDiv{
+        flex-direction: column;
+    }
+    #acBanner, .laptopBannerDiv, #watchBanner, #shoeBanner, #jeansBanner, .tvBannerDiv{
+        width: 0;
+    }
+    .laptopBannerDiv p{
+        display: none;
+    }
+    #simProd{
+        font-size: 1.5em;
+      }
+    .handbagItem-Price #mobleItem-realprice{
+        font-size:1.3em;
+    }    
+    .super-boxChudidar{
+        width:100%;
+    }
+    .allmargin{
+        width: 100%;
+        margin: 10% 0;
+    }
+    .sideBarBody{
+        display: block;
+    }
     #mall-logo{
         font-size: 1.4rem;
     }
-    #bagtitle,#wishlisttitle{display: none;}
+    #bagtitle,#wishlisttitle, #profiletitle{
+        display: none;
+    }
     .carousel-box{
         padding-bottom:10px;
     }
@@ -1195,6 +2232,7 @@ body{
         width:auto;
     }
     .cards-box-container  .watch-gaming-box-container{
+        display: none;
         height:auto;
         gap:10px;
     }
@@ -1232,12 +2270,12 @@ body{
         display: none;
     }
     .menuBar{
-        width:320px;
+        width:290px;
         top: 60px;
         font-size:0.87em;
     }
     #sideBar:checked ~ label #menuCancelIcon{
-        left: 265px;
+        left: 250px;
     }
     
     .nav-bar{
@@ -1252,8 +2290,8 @@ body{
         gap:12px;
     }
     .carousel-image .all-carousel-images-cont{
-        height:180px;
-        width: 240px;
+        height:140px;
+        width: 220px;
     }
     .carousel-container #prod-name{
         font-size: 0.99em;
@@ -1290,9 +2328,6 @@ body{
         height:23px;
         width: 23px;
     }
-    .profileIcon{
-        display: none;
-    }
     .cart-svg #cartCount{
         width: 14px;
         height:14px;
@@ -1306,12 +2341,17 @@ body{
         left:-10px;
         padding: 0px;
     }
-     
+     .addpro{
+        font-size: 0.8em;
+     }
     .listDropdown .loginDropdown{
         font-size: 0.8em;
         min-width: fit-content;
         padding: 1px 5px;
         font-weight:500;
+    }
+    .profileIcon{
+        display: none;
     }
     .image-logo{
         height:50%;
@@ -1331,9 +2371,6 @@ body{
     #menuCancelIcon{
         block-size: 1rem;
         top:-15px;
-    }
-    .cancel-content .menubar-signout-btn{
-        margin-top:100%;
     }
     .hero-container{
         margin-top: 60px;
@@ -1357,32 +2394,460 @@ body{
     .homepageMargin{
         margin: 19% 0 0 0;
     }
-    /* .allmargin{
-        width: 94%;
-        margin: 8.5% auto;
+    .slider-images{
+        width: 41px;
     }
-    .defaultmargin{
-        margin: 9.5% 0 0 0%;
+    .slder-subContainer{
+        gap: 5px;
+        height:220px;
+    }
+    .slider-images:first-child, .slider-images:last-child{
+        display: none;
+    }
+    .slider-images:nth-child(2), .slider-images:nth-child(6){
+        height: 110px;
+    }
+    .slider-images:nth-child(3), .slider-images:nth-child(4), .slider-images:nth-child(5){
+        height: 165px;
+    }
+    .slider-images.activeImg{
+        width: 220px;
+        height:220px;
+    }
+    .slider-container{
+        padding:2pc 0pc;
+    }
+    .slider-container h4{
+        font-size:1em;
+        top: 50%;
+        left: -10%;
+    }
+    #h4handbag, #h4suit{
+        font-size:1.6pc;
+    }
+    .chudidar-main-container, .handbag-main-container, .item-main-container{
+        margin: 5px 2px;
+        width:180px; 
+        /* width: 190px; */
+    }
+    .lahengaSuitItemImg-container{
+        width: 100%;
+        height: 250px;
+        /* height: 261.3px; */
+    }
+    .handbagItemDetails-container{
+        width: 100%;
+    }
+    .chudidarItem-name{
+        font-size: 0.78em;
+        width: 100%;
+    }
+    #updateItem,#deleteItem{
+        font-size: .8em;
+        padding: 2.5% 10%;
+    }
+    .handbagItemDetails-container .items-Cart{
+        font-size: .72em;
+        width: 100px;
+        height:28px;
+    }
+    .sareeItemImg-container, .jeansItemImg-container{
+        width: 100%;
+        height:380px;
+    }
+    .suitItemImg-container{
+        width: 100%;
+        height:225px;
+    }
+    .shoeItemImg-box, .watchItemImg-container{
+        width: 100%;        
+        /* height: 190px; */
+        height:180px;
+    }
+    /* .mobileItemImg-container{
+        width: 100%;
+        height:200px;
     } */
 
+    .mobileItemImg-container{
+        width: 180px;
+        height:220px;
+    }
+    .mobileItemImg-box{
+        /* max-width: 200px;
+        max-height:500px; */
+    }
+        .laptopItem-img{
+        transform: scaleX(.9);
+    }
+    .mobileItemImg-containerPhoneSMALL{
+        width:180px;
+        min-height:200px;
+        max-height:245px;
+        /* width: 300px; */
+        /* height:270px; */
+    }
+    #brandName{
+        font-size: .9em;
+    }
+    .phoneNAME{
+        width: 195px;
+    }
+    .mobileItemImg-containerSMALL{
+        width: 210px;
+    }
+    .tvNAME{
+        width: 165px;
+    }
+
+    .cart-placeorder-btn{
+        width: 100%;
+    }
+    .cart-main-container{
+        flex-direction: column;
+    }
+    .cart-address{
+        width: 95%;
+        margin-top: 0px;
+    }
+    .paymentContainer{
+        margin-top:-10px;
+    }
+    #wish-item-name{
+        font-size: .85em;
+    }
+    #wish-title{
+        width:10pc;
+        font-size: .75em;
+        text-align: left;
+    }
+    .cart-img{
+        height:90px;
+        width: 90px;
+    }
+    .wish-main-div{
+        gap: 18px;       
+    }
+    #cart-item-subtotal, .cart-item-offer{
+        font-size: .85em;
+    }
+    .quantity-cart{
+        padding: 0px 15px;
+        width: 15px;
+        font-size: .9em;
+    }
+    .cart-sub-containerMAX{
+        display: none;
+    }
+    .cart-sub-containerMINI{
+        display: block;
+    }
+    .soloLaptop-Container, .soloSuit-Container{
+        flex-direction: column;
+        margin-top: 5pc;
+    }
+    .soloLaptop-details-decription-container{
+        gap: 0;
+        width: 100%;
+        padding: 0 .4pc;
+        /* gap: 1pc; */
+    }
+    .solomyLaptopImg-Container{
+        width: 100%;
+    }
+    #soloItem-title{
+        font-size: .9em;
+    }
+    .Solosvg1 p{
+        font-size: .67rem;
+    }
+    .lghtwgt p{
+        font-size: .8rem;
+        color: grey;
+    }
+    #soloItemDescriptionTEXT{
+        font-size: .9em;
+        line-height: 1.65;
+    }
+    .two-btns #soloItem-buy-btn, .two-btns #soloItem-cart-btn{
+        width: 50%;
+    }
+    .solojeansImg-Container{
+        width: 100%;
+    }
+    .soloShoeImg-Container{
+        width: 100%;
+        height:auto;
+    }
+    .soloSuitImg-Container{
+        width: auto;
+    }
+    .soloSuitImg-box{
+        width: 95%;
+        height:95%;
+    }    
+    #soloSuit-img{
+        width: 100%;
+    }
+    .cart-placeorder-btn{
+        display: none;
+    }
+    .payDivCart{
+        display: flex;
+    }
+    .manysareeContainer{
+        display: flex;
+        flex-direction: column;
+    }
+    .womensfashionsubContainerIMG img{
+        border-radius: 10%;
+        min-width: 12pc;
+        height:11pc;
+        box-sizing: border-box;
+    }
+    .imgIcrShoe img{
+        height: 12pc;
+    }
+    .imgIcr img{
+        height: 13pc;
+    }
+    .linktitle h3{
+        font-size: 1.6em;
+    }
+    .linktitle p{
+        font-size: 1.1em;
+    }
+    .btnarrow-move button{    
+        font-size: .8em;
+        letter-spacing: .8px;
+    }
+    .arrowLinkSVG{
+        height:20px;
+        width: 20px;
+    }
+    .btnarrow-move{
+        gap:15px;
+        padding: 6px 18px;
+    }
+    .womensfashionLink{
+        align-self: start;
+    }
+    .womensfashionContainer{
+        gap: 0pc;
+    }
+    .moveIMG{
+        height: 15pc;
+        width: 40pc;
+    }
+    .womensfashionsubContainer{
+        margin-bottom: -8pc;
+    }
+    #nikeColl{
+        font-size: 1.8em;
+    }
+    #nikeColl::before{
+        width: 5pc;
+        left: -6pc;
+    }
+    #nikeColl::after{
+        right:-6pc;
+        width: 5pc;
+    }
+    .womensfashionsubContainer{
+        gap: 20px;
+    }
+    .bagbanner{
+        object-position:left;
+    }
+    .homeBagmove{
+        display: none;
+    }
+    .imgforMAX{
+        display: none;
+    }
+    .imgforMid{
+        display: none;
+    }
+    .imgforMINI{
+        display: block;
+    }
+    .mzWallaceColor{
+        color: #fff;
+    }
+    .shoeMovePriceSvg svg{
+        fill: #fff;
+    }
+    #succ{
+        font-size: 1.5rem;
+    }
+    #reachingYou{
+        font-size: 1.08rem;
+    }
+    .placedbutton{
+        font-size: 1rem;
+        padding: 5px 18px;
+    }
+    .emptyCartDiv img{
+        width: 90%;
+    }
+    #letsAdd{
+        font-size: .95rem;
+        text-align: center;
+    }
+    #conShop, .startshop{
+        padding: 6px 20px;
+        font-size:.9em;
+    }
+    .loginComponent{
+        padding: 50% 0;
+    }
+    .tv-box-container{
+        display: none;
+    }
+    .imageSlide-image{
+        height: 100%;
+    }
+    .imageSlide{
+        height:12pc;
+    }
+    .footer-sub{
+        font-size: .8em;
+    }
+    #sec-1-head{
+        font-size: 1.05em;
+    }
+    #foll{
+        font-size: .8em;
+    }
+    .copywright{
+        font-size: .72rem;
+    }
+    .footer-sec-4 p{
+        font-size: .68rem;
+    }
+    .footer-sec-4 h4{
+        font-size: .78em;
+    }
+    .cart-msg{
+        transform: translate(-50%, -100%);
+    }
+    .cart-msg{
+        font-size: .8em;
+        width: 12pc;
+        padding: 8px 10px;
+    }
+    .carousel-image #add-cart-btn{
+        font-size: .8em;
+        padding:8px 0;
+    }
+
+     .filter-container1{
+        display: none;
+     }
+
+     .filter-checkboxes label{
+        font-size: .8rem;
+        text-transform: capitalize;
+    }
+    #filter{
+        font-size: .85rem;
+    }
+    .filter-checkbox{
+        gap: 12px; 
+    }
+    .filter-brandBtn-arrow-container p{
+        font-size: .8rem;
+    }
+    .svgfilterDiv{
+        display: block;
+    }
+    .bagmoveImgMain-container{
+        width: 15pc;
+    }
+    .image-container p, .image-container1 p{
+        font-size: 1.2em;
+    }
+    #noMatch, #errMsg{
+        transform: translateY(22pc);
+    }
+    .super-box{
+        justify-content: center;
+    }
+}
+@media (min-width: 501px) and (max-width:1019px){
+    #acBanner, .laptopBannerDiv, #watchBanner, #shoeBanner, #jeansBanner, .tvBannerDiv{
+        width: 0;
+    }
+    .laptopBannerDiv p{
+        display: none;
+    }
+    .super-box{
+        justify-content: center;
+        padding-top: 1pc;
+        width: 100%;
+    }
+    .lahengaSuitItemImg-container{
+        width: 280px;
+        height:380px;
+    }
+    .chudidarItem-name{
+        font-size: 0.9em;
+        width:240px;
+    }
+    #updateItem,#deleteItem{
+        font-size: .8em;
+        padding: 2.2% 13%;
+    }
+}
+@media (min-width: 1025px) and (max-width:1446px){
+    .super-box{
+        justify-content: center;
+        width: 100%;
+    }
+    .lahengaSuitItemImg-container{
+        width: 280px;
+        height:380px;
+    }
+    .chudidarItem-name{
+        font-size: 0.9em;
+        width:240px;
+    }
+    #updateItem,#deleteItem{
+        font-size: .8em;
+        padding: 2.2% 13%;
+    }
+
+}
+@media screen and (max-width: 1024px){
+    .post-Container{
+        padding: 1.5pc;
+    }
+}
+@media screen and (max-width: 640px){
+    .post-Container{
+        flex-direction: column;
+        padding: 2pc;
+    }
 }
 footer{
     background-color: #efefef; ;
     font-family: var(--standard-Montserratfont);
-    padding: 50px;
+    padding: 50px 10px;
     display: flex;
     flex-direction: column;
     gap: 50px;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    margin-top: 3pc;
 }
 .footer-sub{
     display: flex;
-    flex-wrap: wrap;
+    width: 100%;
+    /* flex-wrap: wrap; */
     justify-content: center;
     align-items: center;
-    gap: 80px;
+    justify-content: space-evenly;
 }
 .footer-sec-1 p{
     color: #221f20;
@@ -1404,14 +2869,28 @@ footer{
     text-align: center;
 }
 .footer-sec-2 p{
-    margin-right:15px;
+    /* margin-right:15px; */
     font-weight:450;
     font-size: 1.1rem;
     color: grey;
     align-self: center;
 }
+.footImg{
+    width: 25px;
+    height:25px;
+    cursor: pointer;
+}
+.footTwitt:hover{
+    fill: #0088ff;
+}
+.footInsta:hover{
+    fill: #e1306c;
+}
+.footFace:hover{
+    fill: #1877F2;
+}
+
 .copywright{
-    font-size: .85rem;
     color: grey;
 }
 .footer-sec-4{
@@ -1423,7 +2902,6 @@ footer{
     font-weight: 500;
 }
 .footer-sec-4 p{
-    font-size: .88rem;
     font-weight: 350;
     color: grey;
     text-align: justify;
@@ -1432,7 +2910,7 @@ footer{
 #shoeSlide{
     margin-right:10px;
 }
-.delete-container,.deleteADD-container{
+.delete-container,.deleteADD-container,.logout-container{
     background-color: rgba(154, 154, 154, 0.629);
     width: 100%;
     height: 100%;
@@ -1513,8 +2991,6 @@ footer{
 }
 #conShop{
     font-family: var(--standard-Montserratfont);
-    padding: 12px 40px;
-    font-size: 1.05em;
     cursor: pointer;
     border: none;
     font-weight:600;
@@ -1522,12 +2998,13 @@ footer{
     border: 1px solid #313131;
 }
 .cart-main-container{
-    width: 100%;
     display: flex;
+    margin: auto;
     margin-top: 120px;
+    justify-content: center;
 }
-.cart-sub-container{
-    display: flex;
+.cart-sub-containerMAX{
+    /* display: flex; */
     flex-direction: column;
 }
 #cart-label{
@@ -1551,6 +3028,7 @@ footer{
     font-size: .88rem;
 }
 .item-main-container{
+    display: flex;
     width: 100%;
 }
 .wish-main-div{
@@ -1583,9 +3061,15 @@ footer{
     gap: 10px;
 }
 #wish-title{
-    width:27pc;
-    color: #38302e;
+    line-height: 1.3;
+    /* color: #38302e; */
+    color: gray;
     cursor: pointer;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 3; /* Number of lines to show */
+    text-overflow: ellipsis;
 }
 .cart-item-info{
     position: absolute;
@@ -1635,8 +3119,6 @@ footer{
     justify-content: center;
     align-items: center;
     background-color: #f0f6fc;
-    height:130px;
-    width: 130px;
     cursor: pointer;
 }
 .cart-img img{
@@ -1644,6 +3126,7 @@ footer{
     height:100%;
     object-fit: contain;
     mix-blend-mode: multiply;
+    border-radius:8px;
 }
 #cart-item-name{
     text-transform: uppercase;
@@ -1656,7 +3139,7 @@ footer{
 
 .cart-quantity-div{
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     gap: 2px;
 }
@@ -1667,10 +3150,10 @@ footer{
 }
 .quantity-cart{
     border: 1px solid gray;
-    padding: 3px 15px;
+    /* padding: 3px 15px; */
     border-radius: 4px;
     font-weight: 600;
-    width: 25px;
+    /* width: 25px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1720,21 +3203,28 @@ footer{
 }
 
 /* see wishlist .................................................................................................*/
+.cartWishMainDiv{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
 .wishlistEmptyDiv{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: auto;
     gap: 40px;
+    max-width: 45pc;
 }
 .wishlistImage{
     display: flex;
-    width: 50%;
+    width: 100%;
+    height: 100%;
 }
 .startshop{
     font-family: var(--standard-Montserratfont),arial;
-    padding: 12px 40px;
-    font-size: 1.05em;
     cursor: pointer;
     border: none;
     color: #fff;
@@ -1748,7 +3238,6 @@ footer{
     font-weight: 580;
 }
 #letsAdd{
-    font-size: 1.1rem;
     color: #1e88e5;
 }
 /* see wishlist ends.......................................................................................... */
@@ -1760,7 +3249,6 @@ footer{
     flex-direction: column;
     gap: 12px;
     margin-top: 45px;
-    width: 400px;
 }
 .order-sub-container{
     border: 1px dashed gray;
@@ -1802,11 +3290,49 @@ footer{
     background-color: #262626;
     color: #fff;
     width: 100%;
-    padding:5%;
+    text-align: center;
+    height: 3.5pc;
     font-size: .95em;
     font-weight: 500;
     letter-spacing: 1px;
     cursor: pointer;
+}
+.cart-placeorder-btn2{
+    border: none;
+    background-color: #262626;
+    color: #fff;
+    text-align: center;
+    height: 2.5pc;
+    border-radius: 8px;
+    font-size: .95em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    width: 60%;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+.payDivCartPayment{
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    align-items: center;
+    font-weight: 700;
+    color: #0a0908;
+}
+.payDivCart{
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    padding: 1pc .5pc;
+    bottom: 0pc;
+    background-color: #f8f9fa;
+    width: 100%;
+    justify-content: space-evenly;
+    gap: 1.5pc;
+    align-items: center;
 }
 #cart-totalpayable{
     color: rgba(0, 0, 0, 0.783);
@@ -1820,8 +3346,6 @@ footer{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    /* width: 45%; */
-    margin-top: 45px;
     box-sizing: border-box;
     border-radius: 6px;
 }
@@ -1946,7 +3470,8 @@ footer{
     font-family: var(--standard-Montserratfont);
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    /* gap: 25px;
+    width: 58%; */
 }
 .paymentSubContainer{
     display: flex;
@@ -2027,21 +3552,662 @@ footer{
     height: 100%;
 }
 #succ{
-    font-size: 2.25rem;
     color: green;
     font-weight: 500;
 }
 #reachingYou{
-    font-size: 1.4rem;
     font-weight: 500;
 }
 .placedbutton{
     font-family: Moderustic;
-    font-size: 1.2rem;
-    padding: 10px 35px;
     cursor: pointer;
-    border: none;
+    border: .5px solid grey;
 }
 .placedbutton:hover{
     opacity: .8;
+}
+.imgBanner{
+    width: 100%;
+    height: 100%;
+    margin-top: 40px;
+}
+/* ................................................................ */
+.womensfashionContainer{
+    width: 100%;
+    padding: 20px 0;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    background: url('../assests/bacground.webp') left/cover no-repeat scroll;
+}
+.womensfashionsubContainer{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 1;
+}
+.womensfashionsubContainerIMG img{
+    border-radius: 10%;
+    mix-blend-mode: multiply;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.moveIMG{
+    background: url('../assests/newwallpapers/newjeans4.jpg') left/cover no-repeat;
+    border-radius: 10%;
+    animation: moveImage 30s  infinite;
+}
+@keyframes moveImage {
+    0%{background-image: url('../assests/newwallpapers/newjeans4.jpg');}
+    25%{background-image: url('../assests/newwallpapers/newjeans4.jpg');}
+    50%{background-image: url('../assests/newwallpapers/newjeans5.webp');}
+    75%{background-image: url('../assests/newwallpapers/newjeans5.webp');}
+    100%{background-image: url('../assests/newwallpapers/newjeans4.jpg');}
+}
+
+.womensfashionLink{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.linktitle h3{
+    font-family: 'Dancing Script', cursive;
+    font-weight:200;
+}
+.linktitle p{
+    font-family:'Sour Gummy',cursive;
+    text-transform: capitalize;
+    opacity: .6;
+}
+.btnarrow-move{
+    display: flex;
+    width: fit-content;
+    cursor: pointer;
+    background-color: gainsboro;
+    border-radius: 30px;
+}
+.btnarrow-move:hover > .arrowLinkSVG{
+    transform: translateX(12px);
+}
+.arrowLinkSVG{
+    transition: .3s all ease;
+}
+.btnarrow-move button{
+    border: none;
+    font-family: kanit;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* .................. */
+.manysareeContainer{
+    display: flex;
+    gap: 4px;
+    justify-content: space-between;
+}
+.manysareeSub {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.image-container1{
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    overflow: hidden; /* Ensures the glow effect stays within rounded corners */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.manysaree1{
+    height: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+}  
+.image-container {
+    position: relative;
+    width: 49%;
+    border-radius: 10px;
+    cursor: pointer;
+    overflow: hidden; /* Ensures the glow effect stays within rounded corners */
+  }
+.image-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+  .image-container p, .image-container1 p{
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-transform: capitalize;
+    font-family: 'Dancing Script', cursive;
+    font-weight: 900;
+    color: wheat;
+}
+.image-container1:hover > p, .image-container:hover > p{
+    opacity: 0;
+    transition: opacity .3s ease, transform .3s ease;
+}
+
+/* Keyframes for glowing effect */
+@keyframes glowAnimation {
+    0% {
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+    50% {
+      width: 300%; /* Adjust to make the glow larger */
+      height:300%;
+      opacity: .5;
+    }
+    100% {
+      width: 300%;
+      height:300%;
+      opacity: .3;
+    }
+  }
+  
+  /* Add glow on hover with animation */
+  .image-container:hover::before, .image-container1:hover::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #a3b18a;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: glowAnimation 3s forwards; /* Apply animation */
+  }
+  /* ................................................................................ */
+  .homeBagmoveContainer{
+    font-family:kanit,cursive;
+    width: 60%;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: auto;
+    
+  }
+  .homeShoemoveContainer{
+    font-family:kanit,cursive;
+    margin: auto;
+    width: 100%;
+    /* padding: 1.5pc 3pc; */
+    margin-top: 6pc;
+    /* background: url('../assests//Impact_Desktop.jpg') left/contain ; */
+  }
+  #simProd{
+    text-align: center;
+  }
+  #nikeColl{
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+    width: fit-content;
+    margin: auto;
+    color: orangered;
+    position: relative;
+    margin-bottom: 1pc;
+  }
+  #nikeColl::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height:.15pc;
+    background-color: gold;
+  }
+  #nikeColl::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height:.15pc;
+    background-color: gold;
+  }
+
+  .homeBagleftmove, .homeBBleftmove{
+    position: absolute;
+    left: -2.5pc;
+    top: 45%;
+    transform: translateY(-50%);
+    z-index: 3;
+  }
+  .homeBagrightmove, .homeBBrightmove{
+    position: absolute;
+    right: 1pc;
+    top: 45%;
+    transform: translateY(-50%);
+    z-index: 3;
+  }
+  .homeBagmove button{
+    border-radius: 50%;
+    width: 3.1pc;
+    height:3.1pc;
+    text-align: center;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+}
+.homeShoetmove{
+    display: flex;
+    gap: 8px;
+    justify-content: end;
+    margin-bottom: 8px;
+    margin-right: 1pc;
+}
+.homeShoetmove button{
+    padding: 1px 2pc;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: rgb(223, 223, 223);
+  }
+
+.homeShoe-subcontainer, .homeBag-subcontainer, .homeBB-subcontainer{
+    display: flex;
+    scroll-behavior: smooth;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    scroll-snap-type: x mandatory;
+    overflow-y: hidden;
+    /* margin-left: -2.5pc; */
+}
+
+.homesingleShoemovebox, .homesingleBagmovebox, .singleShoemovebox, .singleBagmovebox{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap:4px;
+    padding-left: 20px;
+    scroll-snap-align: start;
+    transition: all .3s ease;
+    width: 100%;
+    cursor: pointer;
+}
+.singleShoemovebox{
+    mix-blend-mode: multiply;
+}
+.shoemoveImgMain-container{
+    position: relative;
+    width: 17pc;
+    height:17pc;
+    background-color: transparent;
+    display: flex;
+    justify-content: center; /* or flex-start, flex-end */
+    align-items: center;
+    gap: 10PX;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+.solomoveImgMain-container{
+    position: relative;
+    width: 17pc;
+    height:23pc;
+    background-color: transparent;
+    display: flex;
+    justify-content: center; /* or flex-start, flex-end */
+    align-items: center;
+    gap: 10PX;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    
+}
+.shoemoveImgMain-container img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position:center;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: transform .3s ease;
+}
+.solomoveImgMain-container img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position:center;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: transform .3s ease;
+    mix-blend-mode: multiply;
+}
+.homesingleShoemovebox:hover{
+    transform: scale(1.1,1.1);
+}
+.homesingleBagmovebox:hover{
+    transform: scale(1.05,1.05);
+}
+
+.bagmoveImgMain-container{
+    position: relative;
+    /* height:23pc; */
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    gap: 10PX;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+.bagmoveImgMain-container img{
+    width: 100%;
+    height:100%;
+    object-fit: cover;
+    object-position:center;
+    cursor: pointer; 
+    border-radius: 20px;
+    mix-blend-mode: multiply;
+}
+
+.moveShoeTitle{
+    width: 15PC;
+    font-size: 1.1em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.shoemovepriceMain-contaner{
+    display: flex;
+    gap: 10px;
+    width: fit-content;
+}
+.shoeMovePrice{
+    display: flex;
+    font-size: 1.2em;
+}
+.shewMoveCancel div{
+    fill: grey;
+}
+.shewMoveCancel{
+    color: gray;
+    text-decoration: line-through;
+}
+
+.homeShoe-subcontainer::-webkit-scrollbar, .homeBag-subcontainer::-webkit-scrollbar, .homeBB-subcontainer::-webkit-scrollbar{
+    height: 3px;
+}
+.homeShoe-subcontainer::-webkit-scrollbar-track, .homeBag-subcontainer::-webkit-scrollbar-track, .homeBB-subcontainer::-webkit-scrollbar-track{
+    background-color: #ced4da;
+}
+.homeShoe-subcontainer::-webkit-scrollbar-thumb, .homeBag-subcontainer::-webkit-scrollbar-thumb, .homeBB-subcontainer::-webkit-scrollbar-thumb{
+    background-color: #495057;
+}
+/* ..................................................... */
+.handbagbannerContainer{
+    position: relative;
+    width: 100%;
+    height: 30pc;
+}
+#h4handbag{
+    text-align: center;
+    z-index:1;
+    font-family: 'Protest Revolution';
+    letter-spacing:1px;
+    margin-top: 2pc;
+}
+.BBbannerContainer{
+    position: relative;
+    margin-bottom:2pc;
+    width: 100%;
+    height: 30pc;
+}
+#h4suit{
+    text-align: center;
+    font-family: 'Protest Revolution';    
+    letter-spacing:4px;
+}
+
+.bagbanner{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.BBbanner{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position:left;
+}
+/* ....................................... */
+.soloBagmoveImgMain-container{
+    position: relative;
+    width: 17pc;
+    height:17pc;
+    background-color: transparent;
+    display: flex;
+    justify-content: center; /* or flex-start, flex-end */
+    align-items: center;
+    gap: 10PX;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    transition: all .3s ease;
+}
+.soloBagmoveImgMain-container img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position:center;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all .3s ease;
+    mix-blend-mode: multiply;
+}
+/* .................... */
+.slider-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.slder-subContainer{
+    display: flex;
+    align-items: center;
+    transition:all .7 ease;
+    overflow: hidden;
+}
+.slider-images{
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    transition:all .7s ease;
+}
+.slder-subContainer img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.slider-container h4{
+    font-family: kanit;
+    position: absolute;
+    text-align: left;
+    text-transform: uppercase;
+    color: white;
+    transform: rotate(270deg);
+    transition:all .7s ease;
+    
+}
+
+.slider-images.activeImg h4{
+    opacity: 0;
+}
+.slider-images:not(.slider-images.activeImg){
+    /* filter: blur(1px); */
+}
+.tvBannerDiv, .laptopBannerDiv{
+    position: relative;
+}
+.tvBannerDiv p, .laptopBannerDiv p{
+    position: absolute;
+    z-index: 1;
+    top: 45%;
+    transform: translateY(-50%);
+    font-family: mode;
+    font-family: kanit;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px #081c15;
+    letter-spacing: 2px;
+}
+.tvBannerDiv p::before, .laptopBannerDiv p::before{
+    content: '';
+    width: .4pc;
+    background-color: #081c15;
+    position: absolute;
+    margin-left: -.7pc;
+    border-radius: 4px;
+}
+.shoe-sizes-container{
+    display: flex;
+}
+/* .......................... */
+.filter-container2{
+    display: block;
+    position: fixed;
+    display:flex;
+    gap: 10px;
+    right:0%;
+    top: 25%;
+    z-index:99;
+    background-color: whitesmoke;
+    padding: 2pc;
+    border-radius: 8px;
+    min-height:70%;
+    font-size: .8em;
+    box-shadow: 1px 1px 10px gray, -1px -1px 10px gray;
+    transition: all .3s ease;
+ }
+.svgfilterDiv{
+    position: fixed;    
+    right: 2%;
+    bottom: 1.5%;
+    z-index: 100;
+}
+
+.filterSvg{
+    fill: white;
+    border-radius: 50%;
+    background-color: rgb(8, 8, 8);
+    padding: 1pc;
+    cursor: pointer;
+}
+.blurred {
+    filter: blur(5px);
+    pointer-events: none;
+}
+/* ........................ */
+.loaderNewCont{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+  .loaderNew {
+    width: 10px;
+    height:10px;
+    border-radius: 50%;
+    display: block;
+    margin:15px auto;
+    position: relative;
+    color: black;
+    left: -100px;
+    box-sizing: border-box;
+    animation: shadowRolling 2s linear infinite;
+  }
+  
+  @keyframes shadowRolling {
+    0% {
+      box-shadow: 0px 0 #fff, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+    }
+    12% {
+      box-shadow: 100px 0 black, 0px 0 #fff, 0px 0 #fff, 0px 0 #fff;
+    }
+    25% {
+      box-shadow: 110px 0 black, 100px 0 black, 0px 0 #fff, 0px 0 #fff;
+    }
+    36% {
+      box-shadow: 120px 0 black, 110px 0 black, 100px 0 black, 0px 0 #fff;
+    }
+    50% {
+      box-shadow: 130px 0 black, 120px 0 black, 110px 0 black, 100px 0 black;
+    }
+    62% {
+      box-shadow: 200px 0 #fff, 130px 0 black, 120px 0 black, 110px 0 black;
+    }
+    75% {
+      box-shadow: 200px 0 #fff, 200px 0 #fff, 130px 0 black, 120px 0 black;
+    }
+    87% {
+      box-shadow: 200px 0 #fff, 200px 0 #fff, 200px 0 #fff, 130px 0 black;
+    }
+    100% {
+      box-shadow: 200px 0 #fff, 200px 0 #fff, 200px 0 #fff, 200px 0 #fff;
+    }
+  }
+#noMatch, #errMsg{
+    margin: auto;
+    font-family: var(--standard-Montserratfont);
+}
+#errMsg{
+    color: red;
+}
+.soloACImg-box{
+    max-width:30pc;
+    width: 70%;
+    height:70%;
+}
+.shareLogo{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-left: .5pc;
+}
+.addpro{
+    font-family: var(--standard-Montserratfont);
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease;
+    margin-bottom: 2px;
+}
+.addpro:hover{
+    background-color: #1e88e5;
+    color: white;
+    font-weight: 700;
+}
+.sideAdd{
+    background-color: #333;
+    color: snow;
+    font-family: var(--standard-Montserratfont);
+    text-align: center;
+    font-size: 1.1em;
+    padding: .8pc;
+    width: 85%;
+    margin: auto;
+    border: 1px dashed black;
+}
+#userlength{
+    text-align: center;
+    width:4.5pc;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#malllo{
+    cursor: pointer;
+}
+.infosvgDiv{
+    display: flex;
+    gap: .5pc;
 }

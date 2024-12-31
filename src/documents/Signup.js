@@ -112,13 +112,11 @@ const NotpointerNoneBlur = () => {
     //  if phone number and psd doesn't meet the criteria
     if (!Number(ph)) {
       setWarnCondition(true);
-      console.log('invalid phone number');
       let phInput = document.querySelector('#phone-number');
       triggerShake(phInput);
       printWarningPhone('invalid phone number');
     } else if ((ph.toString()).length !== 10) {
       setWarnCondition(true);
-      console.log('invalid phone number');
       let phInput = document.querySelector('#phone-number');
       triggerShake(phInput);
       printWarningPhone('invalid phone number');
@@ -145,8 +143,6 @@ const NotpointerNoneBlur = () => {
       axios.post('http://www.localhost:3000/user/signup',formData)
       .then(res => {
         setTimeout(() => {
-        console.log(res);
-        console.log('signed up');
         navigate('/login');
         }, 2000);
       })
@@ -156,16 +152,16 @@ const NotpointerNoneBlur = () => {
         NotformDisableStyle();
         RemovesignupButtonLoad();
         NotpointerNoneBlur();
-        console.log(err);
         setHasfetchError(true);
         setfetchError('Signup Failed! please check your internet connection.');
         }, 5000);
       })
     }
-
-
   }
-
+ 
+const goMain = () => {
+  navigate('/');
+}
 
   return (<>
 
@@ -174,17 +170,17 @@ const NotpointerNoneBlur = () => {
     
     <form className='form' onSubmit={signUpHandler} style={colorFunction}>
     {hasFetchError && <p id='printErrSignup'>{printfetchError}</p>}
-      <h2>welcome to <b>Mall</b></h2>
+      <h2>welcome to <b onClick={()=>goMain()} id='malllo'>Mall</b></h2>
       <h4>create your account</h4>
       <div className='signupContent'>
         <div id='float'>
           <input  id='full-name'  autoFocus
-            type='text' placeholder='' onChange={(e) => setName(e.target.value)} disabled={isdisabled}/>
+            type='text' placeholder='' onChange={(e) => setName(e.target.value.trim())} disabled={isdisabled}/>
           <label htmlFor='full-name'>Full name</label>
         </div>
         <div id='float'>
           <input  id='email'  type="email"
-            placeholder='' onChange={(e) => setEmail(e.target.value)} disabled={isdisabled} />
+            placeholder='' onChange={(e) => setEmail(e.target.value.trim())} disabled={isdisabled} />
           <label htmlFor='email'>Email</label>
         </div>
         <div id='float'>

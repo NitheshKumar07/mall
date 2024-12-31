@@ -5,6 +5,7 @@ import '../stylesheets/soloLaptop.css'
 import { useCart } from './CartProvider'
 import SmallLoader from './SmallLoader'
 
+
 const SoloSuit = () => {
     const{ addToCart} = useCart();
 
@@ -18,8 +19,16 @@ const SoloSuit = () => {
     const [cartMessage, setcartMessage] = useState('') //cart added message
     const [messageVisible, setmessageVisible] = useState(false);
     const contentRef = useRef(null);
-  
 
+    const [mobile,setMobile] = useState([]);
+
+    const shoeSizes = ['34', '36', '38', '40', '42'];
+
+const svg = <svg id='carousel-content-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M0 64C0 46.3 14.3 32 32 32l64 0 16 0 176 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-56.2 0c9.6 14.4 16.7 30.6 20.7 48l35.6 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-35.6 0c-13.2 58.3-61.9 103.2-122.2 110.9L274.6 422c14.4 10.3 17.7 30.3 7.4 44.6s-30.3 17.7-44.6 7.4L13.4 314C2.1 306-2.7 291.5 1.5 278.2S18.1 256 32 256l80 0c32.8 0 61-19.7 73.3-48L32 208c-17.7 0-32-14.3-32-32s14.3-32 32-32l153.3 0C173 115.7 144.8 96 112 96L96 96 32 96C14.3 96 0 81.7 0 64z" /></svg>
+const svg1 = <svg id='carousel-content-svg1' fill='rgb(161, 159, 159)' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M0 64C0 46.3 14.3 32 32 32l64 0 16 0 176 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-56.2 0c9.6 14.4 16.7 30.6 20.7 48l35.6 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-35.6 0c-13.2 58.3-61.9 103.2-122.2 110.9L274.6 422c14.4 10.3 17.7 30.3 7.4 44.6s-30.3 17.7-44.6 7.4L13.4 314C2.1 306-2.7 291.5 1.5 278.2S18.1 256 32 256l80 0c32.8 0 61-19.7 73.3-48L32 208c-17.7 0-32-14.3-32-32s14.3-32 32-32l153.3 0C173 115.7 144.8 96 112 96L96 96 32 96C14.3 96 0 81.7 0 64z" /></svg>
+const watsapp = <svg xmlns="http://www.w3.org/2000/svg" fill=' #25d366' viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+
+  
     const collapsedHeight = parseInt('65px');
     useEffect(() => {
       // Dynamically calculate the full height of the content when "Show More" is clicked
@@ -40,11 +49,54 @@ const SoloSuit = () => {
     useEffect(()=>{
         axios.get(`http://www.localhost:3000/product/${params.id}`)
         .then((res=>{
-            console.log(res.data.product);
             setSoloLaptopDetails(res.data.product);
         }))
-        .catch(err => console.log(err))
     },[params.id])
+
+    const currentURL = window.location.href;
+const shareMessage = soloLaptopDetails
+&& `Checkout this product:\n${soloLaptopDetails.title}\nPrice: ₹${Number(soloLaptopDetails.price).toLocaleString('en-IN')} ${soloLaptopDetails.discount ? `(${soloLaptopDetails.discount}% OFF)` : ''}\n\n${currentURL}`
+const watsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareMessage)}`;
+
+
+     // load 11 products
+ useEffect(() => {
+  // setLoading(true);
+  
+  axios.get('http://localhost:3000/product/category/66e0acbc2e6bda2ea8fee823')
+    .then(res => {
+      if (!soloLaptopDetails || !soloLaptopDetails.brandName) {
+        return;
+      }
+        // setLoading(false);
+        const sameBrandItems = res.data.product.filter(item => item.brandName && item.brandName === soloLaptopDetails.brandName  && item._id !== soloLaptopDetails._id).slice(0,3);
+        const remainingCount = 8-sameBrandItems.length;
+           const otherBrands = res.data.product.filter(item => item.brandName && item.brandName !== soloLaptopDetails.brandName && item._id !== soloLaptopDetails._id).slice(0,remainingCount);
+          //  combine both arrays
+        const totalItems = [...sameBrandItems, ...otherBrands];
+        setMobile(totalItems);
+
+    })
+    .catch(err => {
+      // setLoading(false);
+      // setErrorMessage('Failed to load products');
+    });
+}, [soloLaptopDetails]);
+
+// new shoe slide
+const shoeMoveContainer = document.querySelector('.homeShoe-subcontainer');
+if (shoeMoveContainer) {
+        document.querySelector('.homeShoeleftmove').addEventListener('click', () => {
+          const clientWidth = shoeMoveContainer.clientWidth;
+          shoeMoveContainer.scrollLeft -= (clientWidth - 200);
+        })
+}
+if (shoeMoveContainer) {
+        document.querySelector('.homeShoerightmove').addEventListener('click', () => {
+          const clientWidth = shoeMoveContainer.clientWidth;
+          shoeMoveContainer.scrollLeft += (clientWidth - 200);
+        })
+}
 
     const toggleShowMore = () => {
       setShowMore(!ShowMore);
@@ -52,6 +104,16 @@ const SoloSuit = () => {
     const navigate = useNavigate();
     // buy
     const buyNow = () => {
+      const selectedSize = document.querySelector('input[name="SuitSize"]:checked')?.value; 
+      const token = localStorage.getItem('token');
+      if(!token){
+        navigate('/login');
+        return;
+      }else {
+        if(!selectedSize){
+          alert('please select size');
+          return;
+        }
       const product = {
         brandName: soloLaptopDetails.brandName,
         _id: soloLaptopDetails._id,
@@ -59,7 +121,7 @@ const SoloSuit = () => {
         price: soloLaptopDetails.price,
         realprice: soloLaptopDetails.realprice,
         discount: soloLaptopDetails.discount,
-        size: soloLaptopDetails.size,
+        size: selectedSize,
         photo: soloLaptopDetails.photo,
         colour: soloLaptopDetails.colour,
         ctgry: soloLaptopDetails.ctgry
@@ -72,9 +134,15 @@ const SoloSuit = () => {
         navigate('/seecart')
       }, 1000);
     }
+  }
 
 // cart
 const handleAddtoCart = () => {
+  const selectedSize = document.querySelector('input[name="SuitSize"]:checked')?.value; 
+  if(!selectedSize){
+    alert('please select size');
+    return;
+  }
   const product = {
     brandName: soloLaptopDetails.brandName,
     _id: soloLaptopDetails._id,
@@ -82,7 +150,7 @@ const handleAddtoCart = () => {
     price: soloLaptopDetails.price,
     realprice: soloLaptopDetails.realprice,
     discount: soloLaptopDetails.discount,
-    size: soloLaptopDetails.size,
+    size: selectedSize,
     photo: soloLaptopDetails.photo,
     colour: soloLaptopDetails.colour,
     ctgry: soloLaptopDetails.ctgry
@@ -109,12 +177,20 @@ const handleAddtoCart = () => {
     document.querySelector('body').style.opacity = 1;
       }, 2500);
   }
+  const navigateSoloShoe = (id) => {
+    window.open('/solosuit/'+id,'_blank');
+  }
+
+  const handleShare = (url) => {
+    // securely open in new tab
+    window.open(url, '_blank', 'noopener,noreferrer')
+  }
 
   return (<>
   {cartMessage && <div className={`cart-msg ${messageVisible ? 'cart-msg-move' : ''}`}>{cartMessage}</div>}
 
-  {soloLaptopDetails ? 
-  <div className='soloLaptop-Container'>
+  {soloLaptopDetails ? <>
+  <div className='soloSuit-Container allmargin'>
     
     <div className='soloSuitImg-Container'>
       <div className='soloSuitImg-box'>
@@ -130,19 +206,18 @@ const handleAddtoCart = () => {
      <div className='soloItem-realPrice'><p id='soloItem-realRupee'>₹ {Number(soloLaptopDetails.price).toLocaleString('en-IN')} <span id='mrpText'>MRP</span></p><p id='tax'>inclusive of all taxes</p></div>
      {soloLaptopDetails.discount && <div className='soloItem-cancelPrice'><p id='soloItem-cancelRupee'>₹ {Number(soloLaptopDetails.realprice).toLocaleString('en-IN')}</p>
       <p id='soloItem-discount'>{soloLaptopDetails.discount}% OFF</p></div>}
+      <div className='shareLogo' onClick={() => handleShare(watsappURL)}>{watsapp}</div>
     </div>
     <div className='sizeChart'>
         <p>Select Size:</p>
-        <input type='radio' value='SUIT34' name='SuitSize' id='size34'/>
-        <label htmlFor='size34'>34</label>
-        <input type='radio' value='SUIT36' name='SuitSize' id='size36'/>
-        <label htmlFor='size36'>36</label>
-        <input type='radio' value='SUIT38' name='SuitSize' id='size38'/>
-        <label htmlFor='size38'>38</label>
-        <input type='radio' value='SUIT40' name='SuitSize' id='size40'/>
-        <label htmlFor='size40'>40</label>
-        <input type='radio' value='SUIT42' name='SuitSize' id='size42'/>
-        <label htmlFor='size42'>42</label>     
+     <div className="shoe-sizes-container">
+     {shoeSizes.map((size) => (
+            <div key={size}>
+                <input type="radio" value={size} name="SuitSize" id={`size${size}`} />
+                <label htmlFor={`size${size}`}>{size}</label>
+            </div>
+        ))}
+     </div>
     </div>
   </div>
 
@@ -150,7 +225,13 @@ const handleAddtoCart = () => {
   <button id='soloItem-cart-btn' onClick={handleAddtoCart}> {statuscartlabel ? (<SmallLoader/>):(<>{CART} {cartlabel}</>)}</button>
   <button id='soloItem-buy-btn' onClick={buyNow}>{ statusbuylabel ? <SmallLoader/> : 'BUY NOW'}</button>
   </div>
-
+  
+{/* <div className='lghtCont' style={{flexDirection:'row',gap:'1pc'}}>
+<div className='lghtwgt lghtsuit' style={{ padding:'5px 10px'}}><div>{svgFit}</div><p>Custom Fit</p></div>
+<div className='lghtwgt lghtsuit' style={{ padding:'5px 10px'}}><div>{bestPrice}</div><p>Best Price</p></div>
+<div className='lghtwgt lghtsuit' style={{ padding:'5px 10px'}}><div>{original}</div><p>100% Original Quality</p></div>
+</div> */}
+  
   <div className='soloItemDescription-BOX' id='soloSuitDescription-BOX-ID'>
   <h4 className='soloItemDescriptionHEADING'>PRODUCT DETAILS</h4>
   {soloLaptopDetails.brandName && <p>Brand:<span id='soloItemDescription-brandName'>{soloLaptopDetails.brandName}</span></p>}
@@ -170,15 +251,37 @@ const handleAddtoCart = () => {
 
 
 </div>
+<div className='homeShoemoveContainer'>
+        <p id='simProd'>Similar Products</p>
+        <div className='homeShoetmove'>
+        <button className='homeShoeleftmove' >&#10094;</button>
+        <button className='homeShoerightmove' >&#10095;</button>
+        </div>
+        
+        <div className='homeShoe-subcontainer'>
+            {mobile.map((eachmobile) => {
+              return(
+                <div className='singleShoemovebox' key={eachmobile._id} onClick={()=>navigateSoloShoe(eachmobile._id)}>
+                <div className='solomoveImgMain-container'>
+                <img src={eachmobile.photo} alt={eachmobile.title} img/>
+                </div>
+              <div className='shoemoveTitleMain-container'>
+                <p className='moveShoeTitle'>{eachmobile.title}</p>
+                <div className='shoemovepriceMain-contaner'>
+                  <div className='shoeMovePrice'><div>{svg}</div><p>{Number(eachmobile.price).toLocaleString('en-IN')}</p></div>
+                  <div className='shoeMovePrice shewMoveCancel'><p>{eachmobile.discount && <div>{svg1}{Number(eachmobile.realprice).toLocaleString('en-IN')}</div>}</p></div>
+                </div>
+              </div>
+            </div>
+              )
+            })}
+          </div>  
+</div>
+</>
 :
-<p>loading...</p>}
+<div className='loaderNewCont'><div class="loaderNew"></div></div>}
 
   </>)
 }
 
 export default SoloSuit;
-
-
-
-
-  

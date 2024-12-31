@@ -15,6 +15,8 @@
     display: var(--standard-display);
     column-gap:15px;
     display: flex;
+    /* justify-content: center; */
+    padding-top: 2pc;
 }
 #post-items-links{
     display: var(--standard-display);
@@ -36,13 +38,10 @@
     flex-direction: var(--standard-flex-direction);
     row-gap: 30px;
     font-family: var(--standard-font-family);
-    /* background-color: var(--standard-backgroung-color); */
-    /* background-color: green; */
-    /* width:50%; */
     user-select: none;
 }
 .postProducts h1{
-    font-size: 1.9rem;
+    font-size: 1.6rem;
     margin-bottom: -7px;
 }
 .postItemContainer{
@@ -316,4 +315,7 @@
     object-position: center;
     background-color: transparent;
     mix-blend-mode: multiply;
+}
+.phoneItem-name{
+    width: 100%;
 }

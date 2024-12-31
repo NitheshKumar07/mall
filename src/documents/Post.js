@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../stylesheets/postProduct.css'
 import {NavLink, useNavigate} from 'react-router-dom'
 import axios from 'axios'
+// import ReactMarkdown from 'react-markdown'
 
 
 const Post = () => {
@@ -149,10 +150,11 @@ useEffect(() => {
     setButtonLoader();
     setDisabled(true);
     setHasErr(false);    
-    axios.post('http://www.localhost:3000/product',productform)
+    axios.post('http://www.localhost:3000/product',productform,{
+      headers:{Authorization:'Bearer '+localStorage.getItem("token")}
+    })
     .then(res=>
       {
-        console.log(res);
         if( SelectedCategoryID === '66dde0197a66622cc0734fee'){navigate('/phonepage');}
         else if(SelectedCategoryID === '66b7094e89c2a12074133b29') {navigate('/laptoppage');}
         else if(SelectedCategoryID === '66e0ab462e6bda2ea8fee817') {navigate('/tvpage');}
@@ -173,23 +175,29 @@ useEffect(() => {
         removeButtonLoader();
         setDisabled(false);
         setHasErr(true);
-        console.log(err);
         setErr('Unable to upload product!');
        }, 3000);
       })
   }
-  
+
+  // const insertBold = () => {
+  //   setDiscription((prev) => prev + `**bold text**`);
+  // };
+
+  // const insertBullet = (symbol) => {
+  //   setDiscription((prev) => prev + `\n${symbol} `);
+  // };
 
   return (<>
   <div className='post-Container'>
-  <div id='post-items-links'>
+  {/* <div id='post-items-links'>
     <NavLink className={({isActive}) => isActive ? 'current-page-post' : 'initial-link'} to='/category'>AllProducts</NavLink>
     <NavLink className={({isActive}) => isActive ? 'current-page-post' : 'initial-link'} to='/post'>Create New Product</NavLink>
     <NavLink className={({isActive})=>isActive ? 'current-page-post' : 'initial-link'} to='/login'>Login</NavLink>
-</div>
+</div> */}
 
     <form className='postProducts' onSubmit={postProduct} style={colorFunction}>    
-    <h1>Create New Product</h1>
+    <h1 className='crtnew'>Create New Product</h1>
     <hr/>
     {hasErr && <p style={{color:"red" ,fontSize:'1.25rem',textAlign:'center',fontFamily:'monospace,arial'}}>{err}</p>}
     <div className='postItemContainer'>  
@@ -213,8 +221,18 @@ useEffect(() => {
 
     <input disabled={isdisabled}type='file' id='select-img' required onChange={applyImage}/>
     <label htmlFor='select-img' id='select-img-btn' style={buttonClr}>{label}</label>
-    <input placeholder='Enter Brand Name' disabled={isdisabled} type='text'  onChange={e=>setBrandName(e.target.value.toLowerCase((a,b)=>a.toLowerCase()
-    .localeCompare(b.toLowerCase())).trim())}/>
+    {/* <input placeholder='Enter Brand Name' disabled={isdisabled} type='text'  onChange={e=>setBrandName(e.target.value.toLowerCase((a,b)=>a.toLowerCase().localeCompare(b.toLowerCase())).trim())}/> */}
+    <input placeholder='Enter Brand Name' disabled={isdisabled} type='text' onChange={(e) => {
+      const inputValue = e.target.value;
+  // Split into an array of words, sort alphabetically, then join back to a single string
+  const sortedValue = inputValue
+    .split(" ")
+    .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
+    .join(" ")
+    .trim();
+    // Set the original input value after sorting and trimming
+  setBrandName(sortedValue);}}/>
+  
     <input required disabled={isdisabled} type='text' placeholder='Product Name' onChange={e=>setName(e.target.value)}/>
     <div id='price-dis'>
       <input required disabled={isdisabled}type='text' placeholder='Final Price' onChange={e=>setPrice(e.target.value.trim())}/>
@@ -223,7 +241,7 @@ useEffect(() => {
     {/* <input type='text' placeholder='Original Price' value={preDisountPrice} disabled={isdisabled}/> */}
     <input type='text' placeholder='Product Colour' onChange={(e)=>setItemColour(e.target.value.trim())} disabled={isdisabled}/>
     <input type='text' placeholder='Product Code' onChange={(e)=>setProductCode(e.target.value)} disabled={isdisabled}/>
-    <textarea disabled={isdisabled} placeholder='Add Product Details' id='description-text' name='description-text' onChange={e=>setDiscription(e.target.value)}/>
+    <textarea value={description} disabled={isdisabled} placeholder='Add Product Details' id='description-text' name='description-text' onChange={e=>setDiscription(e.target.value)}/>
    </div>
   
 
@@ -255,8 +273,6 @@ useEffect(() => {
     </div>
     <button   id='uploadItem' type='submit' style={buttonClr}>{UploadProduct}</button> 
     </form>
-
-    
 
     </div>
   </>)

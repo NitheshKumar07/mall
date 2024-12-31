@@ -8,10 +8,7 @@ body{
     padding: 0%;
     margin: 0;
     width: 100%;
-    /* height:100vh;  */
     box-sizing: border-box;
-    /* background-color: #f8f9fa; */
-    /* background-color: #e9ecef; */
     transition:background-color ;
 }
 
@@ -26,15 +23,20 @@ body{
 .signupBody{
 background-color: #f8f9fa;
 /* background-color: #e9ecef; */
-
 }
 .loginComponent{
-    /* background-color: rgb(238, 238, 238); */
     background-color: #e9ecef;
-
+    width: fit-content;
+    margin: auto;
+    height: fit-content;
 }
+
 .signupComponent{
     background-color:#f8f9fa ;
+    width: fit-content;
+    margin: auto;
+    /* background-color: yellow; */
+    padding: 5pc 0;
 }
 .form{
     /* background-color: #dcedef;      */
@@ -59,7 +61,6 @@ background-color: #f8f9fa;
     color: #0088ff;
 }
 .signupContent{
-    /* margin-top: -5px; */
     font-size:1.2rem;
     width: 92%;
 }
@@ -99,8 +100,8 @@ background-color: #f8f9fa;
     background-color:#f8f9fa ;
 }
 
-#full-name{
-    /* text-transform: capitalize; */
+#full-name, #email{
+    text-transform: lowercase;
 }
 
 #float input:focus{
@@ -253,4 +254,7 @@ right: 0px;
     .signupContent button {
       font-size: 1rem;
     }
+  }
+  #username{
+    text-transform: lowercase;
   }

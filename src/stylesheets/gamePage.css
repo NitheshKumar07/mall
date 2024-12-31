@@ -4,14 +4,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* overflow: hidden; */
     width:180px;
     height: 280px;
     align-items: center;
+    text-align: center;
+    cursor: pointer;
 }
 .gameItem-img{
     transition: all .3s ease-in-out;
+    width: 72%;
 }
 .gameItem-img:hover{
-    transform: scale(1.2);
+    transform: scale(1.1);
 }

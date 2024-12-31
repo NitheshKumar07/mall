@@ -40,12 +40,12 @@ const svgRupeeSmall=<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512
   <path d="M0 64C0 46.3 14.3 32 32 32l64 0 16 0 176 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-56.2 0c9.6 14.4 16.7 30.6 20.7 48l35.6 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-35.6 0c-13.2 58.3-61.9 103.2-122.2 110.9L274.6 422c14.4 10.3 17.7 30.3 7.4 44.6s-30.3 17.7-44.6 7.4L13.4 314C2.1 306-2.7 291.5 1.5 278.2S18.1 256 32 256l80 0c32.8 0 61-19.7 73.3-48L32 208c-17.7 0-32-14.3-32-32s14.3-32 32-32l153.3 0C173 115.7 144.8 96 112 96L96 96 32 96C14.3 96 0 81.7 0 64z"/></svg>
 const svgHeart=<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className='heart'>
   <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>  
+const infoSvg = <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#000000"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
 
 const params = useParams();
 useEffect(() => {
     axios.get(`http://www.localhost:3000/product/${params.id}`)
     .then((res=>{
-        console.log(res.data.product);
         const product = res.data.product;
         setBrandName(product.brandName);
         setName(product.title);
@@ -53,14 +53,12 @@ useEffect(() => {
         setDisPercent(product.discount);
         setImg(product.photo);
         setPreImage(product.photo);
-        console.log(label)
         setItemColour(product.colour);
         setDiscription(product.description);
         setProductCode(product.productCode);
         // const department = options.find(options => options.id === product.ctgry);
         // setSelectedCategory(department.name);
     }))
-    .catch(err => console.log(err))
 },[params.id])
 
 
@@ -169,7 +167,6 @@ useEffect(() => {
     axios.put(`http://www.localhost:3000/product/${params.id}`,productform)
     .then(res=>
       {
-        console.log(res);
         if( SelectedCategoryID === '66dde0197a66622cc0734fee'){navigate('/phonepage');}
         else if(SelectedCategoryID === '66b7094e89c2a12074133b29') {navigate('/laptoppage');}
         else if(SelectedCategoryID === '66e0ab462e6bda2ea8fee817') {navigate('/tvpage');}
@@ -190,7 +187,6 @@ useEffect(() => {
         removeButtonLoader();
         setDisabled(false);
         setHasErr(true);
-        console.log(err);
         setErr('Unable to upload product!');
        }, 3000);
       })
@@ -223,9 +219,37 @@ useEffect(() => {
 
 
     <input disabled={isdisabled}type='file' id='select-img' required onChange={applyImage}/>
+    <div className='infosvgDiv'>
     <label htmlFor='select-img' id='select-img-btn' style={buttonClr}>{label}</label>
-    <input placeholder='Enter Brand Name' disabled={isdisabled} type='text'  onChange={e=>setBrandName(e.target.value.toLowerCase((a,b)=>a.toLowerCase()
-    .localeCompare(b.toLowerCase())).trim())} value={brandName}/>
+    <abbr title='Re-selecet image atleast once.'>{infoSvg}</abbr>
+    </div>
+
+    {/* <input placeholder='Enter Brand Name' disabled={isdisabled} type='text' onChange={(e) => {
+      const inputValue = e.target.value;
+  // Split into an array of words, sort alphabetically, then join back to a single string
+  const sortedValue = inputValue
+    .split(" ")
+    .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
+    .join(" ")
+    .trim();
+    // Set the original input value after sorting and trimming
+  setBrandName(sortedValue);}}
+  value={brandName}/> */}
+  <input placeholder='Enter Brand Name' disabled={isdisabled} type='text' onChange={(e) => {
+      setBrandName(e.target.value);
+     }} // Directly update the brandName as the user types without sorting
+  onBlur={() => {
+    // When the user leaves the input, sort and trim the brand na
+  const sortedValue = brandName
+    .split(" ")
+    .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
+    .join(" ")
+    .trim();
+    // Set the original input value after sorting and trimming
+  setBrandName(sortedValue);}}
+  value={brandName}/>
+
+
     <input required disabled={isdisabled} type='text' placeholder='Product Name' onChange={e=>setName(e.target.value)} value={name}/>
     <div id='price-dis'>
       <input required disabled={isdisabled}type='text' placeholder='Final Price' onChange={e=>setPrice(e.target.value.trim())} value={price}/>
@@ -242,7 +266,6 @@ useEffect(() => {
     <div className='mobileItemImg-container'>
         <div className='mobileItemImg-box'><img className='Post-mobileItem-img' alt={name}
         src={preImage || '/default-image-path.jpg'}/></div>
-        {/* {svgHeart} */}
     </div>
     <div className='mobileItemDetails-container'>
       <p style={{fontWeight:'700'}}>{brandName}</p>

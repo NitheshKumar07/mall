@@ -1,37 +1,20 @@
 .sareeItemImg-container{
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f3f4;
-    height:330px;
-    overflow: hidden;
-    position: relative; */
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #f0f3f4;
-    width: 335px;
-    height:500px;
     overflow: hidden;
     position: relative;
+    border-radius: 10px;
 
 }
 .sareeItemImg-box{
-    /* background: transparent;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    max-width: 200px;
-    max-height: 500px;
-    align-items: center; */
     width: 100%;
     height: 100%;
     display: flex ;
     justify-content: center;
     overflow: hidden;
+    cursor: pointer;
 }
 .sareeItem-img{
     width: 100%;
@@ -41,4 +24,16 @@
     background-color: transparent;
     mix-blend-mode:multiply;
     transition: all .3s ease;
+}
+
+.lahengaSuitItemImg-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f3f4;
+    /* width: fit-content; */
+    margin: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
 }

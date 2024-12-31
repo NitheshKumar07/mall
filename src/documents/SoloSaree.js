@@ -18,8 +18,13 @@ const SoloSaree = () => {
     const [cartMessage, setcartMessage] = useState('') //cart added message
     const [messageVisible, setmessageVisible] = useState(false);
     const contentRef = useRef(null);
-  
+    
+const [mobile,setMobile] = useState([]);
 
+const svg = <svg id='carousel-content-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M0 64C0 46.3 14.3 32 32 32l64 0 16 0 176 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-56.2 0c9.6 14.4 16.7 30.6 20.7 48l35.6 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-35.6 0c-13.2 58.3-61.9 103.2-122.2 110.9L274.6 422c14.4 10.3 17.7 30.3 7.4 44.6s-30.3 17.7-44.6 7.4L13.4 314C2.1 306-2.7 291.5 1.5 278.2S18.1 256 32 256l80 0c32.8 0 61-19.7 73.3-48L32 208c-17.7 0-32-14.3-32-32s14.3-32 32-32l153.3 0C173 115.7 144.8 96 112 96L96 96 32 96C14.3 96 0 81.7 0 64z" /></svg>
+const svg1 = <svg id='carousel-content-svg1' fill='rgb(161, 159, 159)' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M0 64C0 46.3 14.3 32 32 32l64 0 16 0 176 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-56.2 0c9.6 14.4 16.7 30.6 20.7 48l35.6 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-35.6 0c-13.2 58.3-61.9 103.2-122.2 110.9L274.6 422c14.4 10.3 17.7 30.3 7.4 44.6s-30.3 17.7-44.6 7.4L13.4 314C2.1 306-2.7 291.5 1.5 278.2S18.1 256 32 256l80 0c32.8 0 61-19.7 73.3-48L32 208c-17.7 0-32-14.3-32-32s14.3-32 32-32l153.3 0C173 115.7 144.8 96 112 96L96 96 32 96C14.3 96 0 81.7 0 64z" /></svg>
+const watsapp = <svg xmlns="http://www.w3.org/2000/svg" fill=' #25d366' viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+  
     const collapsedHeight = parseInt('200px');
     useEffect(() => {
       // Dynamically calculate the full height of the content when "Show More" is clicked
@@ -40,11 +45,56 @@ const SoloSaree = () => {
     useEffect(()=>{
         axios.get(`http://www.localhost:3000/product/${params.id}`)
         .then((res=>{
-            console.log(res.data.product);
             setSoloLaptopDetails(res.data.product);
         }))
-        .catch(err => console.log(err))
     },[params.id])
+
+    const currentURL = window.location.href;
+    const shareMessage = soloLaptopDetails
+    && `Checkout this product:\n${soloLaptopDetails.title}\nPrice: ₹${Number(soloLaptopDetails.price).toLocaleString('en-IN')} ${soloLaptopDetails.discount ? `(${soloLaptopDetails.discount}% OFF)` : ''}\n\n${currentURL}`
+   const watsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareMessage)}`;
+
+     // load 11 products
+ useEffect(() => {
+  // setLoading(true);
+  
+  axios.get('http://localhost:3000/product/category/66de8d5d74a2d32f040c29ba')
+    .then(res => {
+      if (!soloLaptopDetails || !soloLaptopDetails.brandName) {
+        return;
+      }
+        // setLoading(false);
+        const sameBrandItems = res.data.product.filter(item => item.brandName && item.brandName === soloLaptopDetails.brandName  && item._id !== soloLaptopDetails._id).slice(0,3);
+
+        const remainingCount = 8-sameBrandItems.length;
+           const otherBrands = res.data.product.filter(item => item.brandName && item.brandName !== soloLaptopDetails.brandName && item._id !== soloLaptopDetails._id).slice(0,remainingCount);
+
+          //  combine both arrays
+        const totalItems = [...sameBrandItems, ...otherBrands];
+
+        setMobile(totalItems);
+
+    })
+    .catch(err => {
+      // setLoading(false);
+      // setErrorMessage('Failed to load products');
+    });
+}, [soloLaptopDetails]);
+
+// new shoe slide
+const shoeMoveContainer = document.querySelector('.homeShoe-subcontainer');
+if (shoeMoveContainer) {
+        document.querySelector('.homeShoeleftmove').addEventListener('click', () => {
+          const clientWidth = shoeMoveContainer.clientWidth;
+          shoeMoveContainer.scrollLeft -= (clientWidth - 200);
+        })
+}
+if (shoeMoveContainer) {
+        document.querySelector('.homeShoerightmove').addEventListener('click', () => {
+          const clientWidth = shoeMoveContainer.clientWidth;
+          shoeMoveContainer.scrollLeft += (clientWidth - 200);
+        })
+}
 
     const toggleShowMore = () => {
       setShowMore(!ShowMore);
@@ -54,6 +104,11 @@ const SoloSaree = () => {
     const navigate = useNavigate();
     // buy
     const buyNow = () => {
+      const token = localStorage.getItem('token');
+      if(!token){
+        navigate('/login');
+        return;
+      }else {
       const product = {
         brandName: soloLaptopDetails.brandName,
         _id: soloLaptopDetails._id,
@@ -74,6 +129,7 @@ const SoloSaree = () => {
         navigate('/seecart')
       }, 1000);
     }
+  }
     
 // cart
 const handleAddtoCart = () => {
@@ -112,11 +168,19 @@ const handleAddtoCart = () => {
       }, 2500);
   }
 
+  const navigateSoloShoe = (id) => {
+    window.open('/solosaree/'+id,'_blank');
+  }
+  const handleShare = (url) => {
+    // securely open in new tab
+    window.open(url, '_blank', 'noopener,noreferrer')
+  }
+
   return (<>
   {cartMessage && <div className={`cart-msg ${messageVisible ? 'cart-msg-move' : ''}`}>{cartMessage}</div>}
 
-  {soloLaptopDetails ? 
-  <div className='soloLaptop-Container'>
+  {soloLaptopDetails ? <>
+  <div className='soloLaptop-Container allmargin'>
     
   <div className='soloShoeImg-Container'>
       <div className='soloShoeImg-box'>
@@ -132,6 +196,7 @@ const handleAddtoCart = () => {
      <div className='soloItem-realPrice'><p id='soloItem-realRupee'>₹ {Number(soloLaptopDetails.price).toLocaleString('en-IN')} <span id='mrpText'>MRP</span></p><p id='tax'>inclusive of all taxes</p></div>
      {soloLaptopDetails.discount && <div className='soloItem-cancelPrice'><p id='soloItem-cancelRupee'>₹ {Number(soloLaptopDetails.realprice).toLocaleString('en-IN')}</p>
       <p id='soloItem-discount'>{soloLaptopDetails.discount}% OFF</p></div>}
+      <div className='shareLogo' onClick={() => handleShare(watsappURL)}>{watsapp}</div>
     </div>
   </div>
 
@@ -140,9 +205,25 @@ const handleAddtoCart = () => {
   <button id='soloItem-buy-btn' onClick={buyNow}>{ statusbuylabel ? <SmallLoader/> : 'BUY NOW'}</button>
   </div>
 
+  <div className='svgsContainer'>
+    <div className='Solosvg1'>
+    <div className='solotruckdiv'><img src={require('../assests/icons8-return-24.png')}/></div>
+    <p>7 Days Return</p>
+    </div>
+    <div className='Solosvg1'>
+      <div className='solotruckdiv'><img src={require('../assests/icons8-truck-48.png')}/></div>
+      <p>Free Shipping Across India</p>
+    </div>
+    <div className='Solosvg1'>
+      <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#333"><path d="M560-440q-50 0-85-35t-35-85q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35ZM280-320q-33 0-56.5-23.5T200-400v-320q0-33 23.5-56.5T280-800h560q33 0 56.5 23.5T920-720v320q0 33-23.5 56.5T840-320H280Zm80-80h400q0-33 23.5-56.5T840-480v-160q-33 0-56.5-23.5T760-720H360q0 33-23.5 56.5T280-640v160q33 0 56.5 23.5T360-400Zm440 240H120q-33 0-56.5-23.5T40-240v-440h80v440h680v80ZM280-400v-320 320Z"/></svg>
+      <p>Pay on Delivery Available</p>
+    </div>  
+  </div>
+  
+  
   <div className='soloItemDescription-BOX' id='soloItemDescription-BOX-ID'>
   <h4 className='soloItemDescriptionHEADING'>PRODUCT DETAILS</h4>
-  {soloLaptopDetails.brandName && <p>Brand:<span id='soloItemDescription-brandName'>{soloLaptopDetails.brandName}</span></p>}
+  {soloLaptopDetails.brandName && <p>Saree Type:<span id='soloItemDescription-brandName'>{soloLaptopDetails.brandName}</span></p>}
   {soloLaptopDetails.colour && <p>Colour:<span id='soloItemDescription-colour'>{soloLaptopDetails.colour}</span></p>}
   {soloLaptopDetails.productCode && <p>Product code:<span id='soloItemDescription-colour'>{soloLaptopDetails.productCode}</span></p>}
   {soloLaptopDetails.description && <div><div id='soloItemDescriptionTEXT' ref={contentRef} style={{height:contentHeight}}>
@@ -157,11 +238,36 @@ const handleAddtoCart = () => {
 
   </div>
 
-
 </div>
+<div className='homeShoemoveContainer'>
+        <p id='simProd'>Similar Products</p>
+        <div className='homeShoetmove'>
+        <button className='homeShoeleftmove' >&#10094;</button>
+        <button className='homeShoerightmove' >&#10095;</button>
+        </div>
+        
+        <div className='homeShoe-subcontainer'>
+            {mobile.map((eachmobile) => {
+              return(
+                <div className='singleShoemovebox' key={eachmobile._id} onClick={()=>navigateSoloShoe(eachmobile._id)}>
+                <div className='solomoveImgMain-container'>
+                <img src={eachmobile.photo} alt={eachmobile.title} img/>
+                </div>
+              <div className='shoemoveTitleMain-container'>
+                <p className='moveShoeTitle'>{eachmobile.title}</p>
+                <div className='shoemovepriceMain-contaner'>
+                  <div className='shoeMovePrice'><div>{svg}</div><p>{Number(eachmobile.price).toLocaleString('en-IN')}</p></div>
+                  <div className='shoeMovePrice shewMoveCancel'><p>{eachmobile.discount && <div>{svg1}{Number(eachmobile.realprice).toLocaleString('en-IN')}</div>}</p></div>
+                </div>
+              </div>
+            </div>
+              )
+            })}
+          </div>  
+</div>
+</>
 :
-<p>loading...</p>}
-
+<div className='loaderNewCont'><div class="loaderNew"></div></div>}
   </>)
 }
 

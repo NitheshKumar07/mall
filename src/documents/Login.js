@@ -2,9 +2,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import '../stylesheets/signupLogin.css'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useCart } from './CartProvider';
 
 export function Login  () {
 
+  const [user,setUser] = useState('');
   const [email,setEmail] = useState('');
   const [psd,setPsd] = useState();
   const [isshowpsd,setShowpsd] = useState('');
@@ -15,6 +17,8 @@ export function Login  () {
 
   const [hasFetchError,setHasfetchError] = useState(false);
   const [printfetchError,setfetchError] = useState('');
+
+  const { setCartItems } = useCart();
 
 
   useEffect(()=>{
@@ -83,15 +87,19 @@ const NotpointerNoneBlur = () => {
       formDisableStyle();
       signupButtonLoad();
       pointerNoneBlur();
-    // for posting
-    const formData = new FormData();
-    formData.append('userName', email);
-    formData.append('password', psd);
-      axios.post("http://www.localhost:3000/user/login",formData)
+      
+      axios.post('http://www.localhost:3000/user/login',
+        {
+            userName:user,
+            password:psd
+        })
       .then(res => {
+        const token = res.data.token;
+        const user = res.data.userName;
+        
+        localStorage.setItem("token",res.data.token);
+        localStorage.setItem('username',res.data.userName);      
         setTimeout(() => {
-          console.log('res:',res);
-        console.log('logged in');
         navigate('/');
         }, 3000);
       }) 
@@ -101,27 +109,28 @@ const NotpointerNoneBlur = () => {
         NotformDisableStyle();
         RemovesignupButtonLoad();
         NotpointerNoneBlur();
-        console.log(err);
         setHasfetchError(true);
         setfetchError(err.response.data.msg);
         }, 5000);
       })
-    
-
-
   }
 
-    return (<div className="loginComponent">
+  const goMain = () => {
+    navigate('/');
+  }
+  
+    return (
+    <div className="loginComponent">
       {hasFetchError && <p id='printErrSignup' style={{textAlign:"center",fontSize:'1.2em'}}>{printfetchError}</p>}
       <div className='formanime' />
 
      <form className='form' onSubmit={loginHandler} style={colorFunction}>
      
-    <h1>Login <b>Mall</b></h1>
+    <h1>Login <b id='malllo' onClick={() => goMain()}>Mall</b></h1>
       <div className='signupContent'> 
       <div id='float'>
-        <input id='email'  disabled={isdisabled} autoFocus  type="text" placeholder='' onChange={(e)=>setEmail(e.target.value)}/>
-        <label htmlFor='email'>Username</label>
+        <input id='username'  disabled={isdisabled} autoFocus  type="text" placeholder='' onChange={(e)=>setUser(e.target.value.trim())}/>
+        <label htmlFor='username'>Username</label>
         </div>
         <div id='float'>
         <input id='conf-psd'  placeholder='' disabled={isdisabled}

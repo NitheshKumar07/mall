@@ -1,11 +1,17 @@
-.soloLaptop-Container{
+
+.soloLaptop-Container, .soloSuit-Container{
     display: flex;
     font-family:var(--standard-Montserratfont) ;
     color: #171717;
-    width: 100%;
+    width:100%;
     min-height:650px;
+    gap: 1pc;
 }
-.soloLaptop-Container .soloItem-complete-price{
+.soloLaptop-Container{
+    justify-content: space-evenly;
+}
+
+.soloItem-complete-price{
     display: flex;
     margin:10px 0;
 }
@@ -25,12 +31,11 @@
     height: 100%;
 }
 /* item details ..................................................................................................................*/
-.soloLaptop-Container .soloLaptop-details-decription-container{
+.soloLaptop-details-decription-container{
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    width: 50%;
     height: 100%;
+    box-sizing: border-box;
 }
 .soloLaptopDetails-container{
     display: flex;
@@ -44,7 +49,6 @@
     letter-spacing: .4px;
 }
 #soloItem-title{
-    font-size: 1.06em;
     /* width: 90%; */
     line-height:1.38;
 }
@@ -104,9 +108,9 @@
     font-size: .85em;
 }
 #soloItemDescriptionTEXT{
-    line-height: 1.5;
     overflow: hidden;
     transition: all .3s ease-in-out;
+    text-transform: capitalize;
 }
 /*  BUTTONS ..................................................... */
 .two-btns{
@@ -119,7 +123,7 @@
     cursor: pointer;
 }
 .two-btns #soloItem-cart-btn{
-    padding: 15px 60px;
+    /* padding: 15px 60px; */
     background-color: #262626;
     color: #ffffff;
     font-weight: 550;
@@ -128,11 +132,11 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 18pc;
+    /* width: 18pc; */
 }
 .two-btns #soloItem-buy-btn{
-    padding: 15px 60px;
-    width: 18pc;
+    /* padding: 15px 60px; */
+    /* width: 18pc; */
     height: 3.2pc;
     font-weight: 550;
     display: flex;
@@ -180,8 +184,6 @@
 }
 /* solo shoe CSS */
 .soloShoeImg-Container{
-    width: 500px;
-    height:450px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -193,6 +195,11 @@
 #soloShoe-img{
     width: 100%;
     /* height: 100%; */
+}
+.soloGameImg-box{
+    max-width: 20pc;
+    width: 70%;
+    height:70%;
 }
 #soloItemDescription-BOX-ID{
     background-color: #e9ecefa3;
@@ -215,17 +222,9 @@
 
 /* ...............solo suit css */
 .soloSuitImg-Container{
-    width: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.soloSuitImg-box{
-    width: 100%;
-    height:100%;
-}
-#soloSuit-img{
-    min-width: 100%;
 }
 #soloSuitDescription-BOX-ID:hover{
     background-color: #e9ecefa3;
@@ -253,7 +252,6 @@
 /* cart message */
 .cart-msg{
     background-color: #001d3d;
-    padding: 10px 20px;
     border-radius: 20px;
     font-family: var(--standard-Montserratfont);
     font-weight: 500;
@@ -264,7 +262,69 @@
     left: 50%;
     transition: all .35s ease;
     z-index: 10;
+    text-align: center;
 }
 .cart-msg-move{
     top:100px;
+}
+.svgsContainer{
+    display: flex;
+    gap: 20px;
+    width: fit-content;
+    margin: 18px 0;
+    transition: .3s ease all;
+}
+.Solosvg1{
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Solosvg1 p{
+    text-align: center;
+}
+.solotruckdiv{
+    width: 30px;
+    height:34.9px;
+}
+.solotruckdiv img{
+    width: 100%;
+    height: 100%;
+}
+/* ................................................................................................................ */
+.solomyLaptopImg-Container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.solomyLaptopImg-box{
+    min-width: 90%;
+}
+.solojeansImg-Container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.solojeansImg-box{
+    width: 100%;
+    height:100%;
+}
+.solojeansImg-box img{
+    height: 100%;
+    width: 100%;
+}
+/* .................................. */
+.lghtCont{
+    display: flex;
+    flex-direction: column;
+    gap: .5pc;
+}
+.lghtwgt{
+    display: flex;
+    align-items: center;
+    gap: .8pc;
+}
+.lghtsuit{
+    background-color: #f6f8f938;
 }

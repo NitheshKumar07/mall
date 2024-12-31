@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useCart } from './CartProvider'
 import {useNavigate} from 'react-router'
+import SmallLoader from './SmallLoader'
 
 const SeeCart = () => {
     const { cartItems, updateCartItem, clearCart, removeItem, updateQuantity } = useCart(); 
@@ -8,6 +9,7 @@ const SeeCart = () => {
     const [yoursavings, setyoursavings] = useState('');
     const [totalPayable, settotalPayable] = useState('');
 
+  const [statuscartlabel, setstatuscartlabel] = useState(false);
 
     const [addresses, setaddresses] = useState([]);
     const [name, setName] = useState('');
@@ -26,9 +28,14 @@ const SeeCart = () => {
 
     const [addnotchecked, setaddnotchecked] = useState(false)
 
-    useEffect(() => {
-      console.log(cartItems);
-    },[cartItems])
+    const sizesMap = {
+      '66e0ac832e6bda2ea8fee821' : ['7', '8', '9', '10', '11'],  //shoe sizes
+      '66e0acbc2e6bda2ea8fee823' : ['34', '36', '38', '40', '42'],  //suit sizes
+      '66e0ace82e6bda2ea8fee825' : ['28', '30', '32', '34', '36'],  //jeans sizes
+      '66e0ac1e2e6bda2ea8fee81d' : ['M', 'L', 'XL', 'XXL'],  //chudidar sizes
+    };
+    // const availableSizes = sizesMap[item.ctgry];
+    const shoeSizes = ['7', '8', '9', '10', '11'];
     
     const svgRupee=<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" className='bigRupee'>
     <path d="M0 64C0 46.3 14.3 32 32 32l64 0 16 0 176 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-56.2 0c9.6 14.4 16.7 30.6 20.7 48l35.6 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-35.6 0c-13.2 58.3-61.9 103.2-122.2 110.9L274.6 422c14.4 10.3 17.7 30.3 7.4 44.6s-30.3 17.7-44.6 7.4L13.4 314C2.1 306-2.7 291.5 1.5 278.2S18.1 256 32 256l80 0c32.8 0 61-19.7 73.3-48L32 208c-17.7 0-32-14.3-32-32s14.3-32 32-32l153.3 0C173 115.7 144.8 96 112 96L96 96 32 96C14.3 96 0 81.7 0 64z"/></svg>
@@ -39,14 +46,21 @@ const SeeCart = () => {
 
     const svgInfo = <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="gray"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
 
-    
+    useEffect(() => {
+      const  storedAddresses = JSON.parse(localStorage.getItem('addresses'));
+      if(storedAddresses){
+        setaddresses(storedAddresses);
+      }
+    }, []);
+
+    useEffect(() => {
+      localStorage.setItem('addresses', JSON.stringify(addresses));
+    }, [addresses]);
 
 // reach solo item
 const navigateSoloLaptop = (id, ctgryId) => {
-  console.log('Category ID:', ctgryId);
   if(ctgryId === '66b7094e89c2a12074133b29') {
     window.open('/sololaptop/'+id, '_blank');
-    console.log('solo laptop');
   } else if(ctgryId === '66dde0197a66622cc0734fee') {
     window.open('/solophone/'+id, '_blank');
   } else if(ctgryId === '66e0ab462e6bda2ea8fee817') {
@@ -65,7 +79,6 @@ const navigateSoloLaptop = (id, ctgryId) => {
     window.open('/solohandbag/'+id, '_blank');
   } else if(ctgryId === '66e0ac832e6bda2ea8fee821') {
     window.open('/soloshoe/'+id, '_blank');
-    console.log('shoe solo');
   } else if(ctgryId === '66e0acbc2e6bda2ea8fee823') {
     window.open('/solosuit/'+id, '_blank');
   } else if(ctgryId === '66e0ace82e6bda2ea8fee825') {
@@ -150,15 +163,10 @@ const deleteADDNo = () => {
   document.querySelector('.deleteADD-container').style.display='none'    
 }
 
-// const deleteAddress = (addressINDEX) => {  
-//   setaddresses(addresses.filter((_,index) => index !== addressINDEX));
-//   // if selected address deleted then rests
-//   if(selectedAddress === addressINDEX){
-//   setselectAddress(null);
-//   }
-// }
-
 const buyButton = () => {
+  setstatuscartlabel(true);
+
+setTimeout(() => {
   if(currentStage === 1){
     setcurrentStage(2); //show address
     // setaddnotchecked(false);
@@ -177,6 +185,11 @@ const buyButton = () => {
     clearCart();
     }
   }
+}, 1100);
+
+  setTimeout(() => {
+    setstatuscartlabel(false);
+    },1000);  
 
 }
 
@@ -204,17 +217,19 @@ const buyButton = () => {
 
 
   {cartItems.length === 0 & currentStage !== 4 ? (
+    <div className='cartWishMainDiv'>
     <div className='emptyCartDiv'>
     <img src={require('../assests/empty-cart.png')}/>
     <p id='soLight'>Hey, it feels so light!</p>
     <p id='letsAdd'>There is nothing in your cart. Let's add some items.</p>
     <button id='conShop' onClick={() => navigate('/category')}>CONTINUE SHOPPING</button>
-    </div>)
-    : (
-    <> 
-      <div className='cart-main-container'>
+    </div>
+    </div>) 
+    : 
+    (<> 
+      <div className='cart-main-container' id='PaymentHead'>
       {currentStage === 1 &&
-      <div className='cart-sub-container'>
+      <div className='cart-sub-container cart-sub-containerMAX'>
       <p id='cart-label'>SHOPPING CART</p>
       <div className='cart-heading'>
       <p>Product</p>
@@ -222,7 +237,6 @@ const buyButton = () => {
       <p>Subtotal</p>
       </div>
       {cartItems.map((item,index) => (
-        
       <div key={index}>
         <div className='cart-main-div'>
           <button className='cart-remove-btn' onClick={()=>handleRemoveItem(item._id)}><svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="18px" fill="#333"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg>          </button>
@@ -230,15 +244,14 @@ const buyButton = () => {
             <img src={item.photo} alt={item.title} onClick={()=>navigateSoloLaptop(item._id,item.ctgry)}/>
             <div className='cart-item-info'>
               <p id='cart-title' onClick={()=>navigateSoloLaptop(item._id,item.ctgry)}>{item.title}</p>
-              <p>{item.size}</p>
               {item.size &&
               <div className='cart-size-dropdown'>
               <p>Selected size:</p>
               <select value={item.size} onChange={(e) => updateCartItem(item._id,{size : e.target.value})}>
-              <option value='4'>4</option>
-              <option value='5'>5</option>
-              <option value='6'>6</option>
-              </select>
+              {sizesMap[item.ctgry]?.map((size) => (
+                    <option key={size} value={size}>{size}</option>
+            ))} 
+            </select>
               </div>
               }
             </div>
@@ -251,7 +264,7 @@ const buyButton = () => {
           </div>
           <div className='cart-subtotal-div'>
             <div>{svgRupee}</div>
-            <p id='cart-item-subtotal'>{Number(item.price * item.quantity).toLocaleString('en-IN')}</p></div>
+            <p id='cart-item-su btotal'>{Number(item.price * item.quantity).toLocaleString('en-IN')}</p></div>
         </div>
         {/* ........................................................................................ */}
       </div>
@@ -261,10 +274,57 @@ const buyButton = () => {
       </div>
       </div>
       }
-
+{/* ........................................................................................... */}
+{currentStage === 1 &&
+      <div className='cart-sub-container cart-sub-containerMINI'>
+      <p id='cart-label'>SHOPPING CART</p>
+      {cartItems.map((item,index) => (
+             <div key={index} className='wish-main-container'>
+             <div className='wish-main-div'>
+               <button className='cart-remove-btn' onClick={() => handleRemoveItem(item._id)}><svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="18px" fill="#333"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg></button>
+               <div className='cart-img'>
+                 <img src={item.photo} alt={item.title} onClick={()=>navigateSoloLaptop(item._id,item.ctgry)}/>
+               </div>
+               <div className='wish-item-info'>
+               <p id='wish-item-name'>{item.brandName}</p>
+               <p id='wish-title' onClick={()=>navigateSoloLaptop(item._id,item.ctgry)}>{item.title}</p>
+               <div>{item.size &&
+              <div className='cart-size-dropdown'>
+              <p>Size:</p>
+              <select value={item.size} onChange={(e) => updateCartItem(item._id,{size : e.target.value})}>
+              {sizesMap[item.ctgry]?.map((size) => (
+                    <option key={size} value={size}>{size}</option>))} 
+            </select>
+              </div>
+              }</div>
+               <div className='cart-quantity-div'>
+          <button onClick={() => updateQuantity(item._id, false)}><svg xmlns="http://www.w3.org/2000/svg" height="15px" viewBox="0 -960 960 960" width="15px" fill="#5f6368"><path d="M200-440v-80h560v80H200Z"/></svg>            </button>
+          <div className='quantity-cart'>{item.quantity}</div>
+          <button onClick={() => updateQuantity(item._id, true)}><svg xmlns="http://www.w3.org/2000/svg" height="15px" viewBox="0 -960 960 960" width="15px" fill="#5f6368"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>          </button>
+          </div>
+                 </div>
+               <div className='cart-subtotal-div' style={{flexDirection:'column',gap:'5px'}}>
+                 <div className='wishsvgPara'>
+                <p>{svgRupee}</p>
+                <p id='cart-item-su btotal'>{Number(item.price * item.quantity).toLocaleString('en-IN')}</p>
+                </div>
+                 {item.discount && <div style={{display:'flex',gap:'4px',justifyContent:'center',alignItems:'center'}}>
+                 <p className='cart-item-offer' style={{color:'green'}}>{item.discount}%</p>
+                 <p className='cart-item-offer' style={{color:'green'}}>Off</p>
+                 </div>}
+                 </div>
+             </div>
+           </div> 
+      ))}
+      <div className='cart-clear-checkout-btns'>
+        <button className='cart-clear-btn' onClick={handleClearCart}>Clear Cart</button>
+      </div>
+      </div>
+}
+{/* ................................................................................................ */}
 {/* adress */}
       {currentStage === 2 &&
-      <div className='cart-address' style={{minWidth:'62%'}}>
+      <div className='cart-address'> {/* style={{minWidth:'62%'}} */}
       <p className='selectAddress'>SELECT DELIVERY ADDRESS</p>
 
      {addresses.length === 0 ? (
@@ -364,12 +424,12 @@ const buyButton = () => {
         <input id='paymentRadio' type='radio' checked={selectedPayment === 'cashondelivery'} readOnly/>
         <div className='paymentInfo cashOn'>
         <div className='paymentImagesPara'>
-        <p className='firstP'>Cash on Delivery</p>
+        <p className='firstP'>Pay on Delivery</p>
         <div className='paymentImagesSubContainer'>
           <div className='paymentsoloImage'><img src={require('../assests/paymentImages/icons8-cash.gif')}/></div>
         </div>
         </div>
-        <p style={{fontWeight:'400'}}>pay cash at the time of delivery</p>
+        <p style={{fontWeight:'400'}}>pay at the time of delivery through any mode</p>
         </div>
         </div>
       </div>
@@ -377,12 +437,14 @@ const buyButton = () => {
    
 {/* order sucessfully */}
 {currentStage === 4 &&
+    <div className='cartWishMainDiv'>
 <div className='placedContainer'>
   <p id='succ'>Order successfully placed!</p>
   <div className='truckContainer'>
   <div className='truckdiv'><img src={require("../assests/paymentImages/icons8-truck.gif")}/></div>
   <p id='reachingYou'>Your order is reaching to you!</p></div>
   <button className='placedbutton' onClick={() => navigate('/category')}>shop more</button>
+</div>
 </div>
 }
 
@@ -422,8 +484,18 @@ const buyButton = () => {
 
       </div>
       {currentStage < 4 &&
+      <>
       <button className='cart-placeorder-btn' onClick={buyButton}>
-        {currentStage === 2 ? 'CONTINUE' : 'PLACE ORDER'}</button>
+      {statuscartlabel ?(<SmallLoader/>) :
+      <>{currentStage === 2 ? 'CONTINUE' : 'PLACE ORDER'}</>}</button>
+
+      <div className='payDivCart'>
+          <p className='payDivCartPayment'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width='.9rem' height='.93rem' fill='black'>
+        <path d="M0 64C0 46.3 14.3 32 32 32l64 0 16 0 176 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-56.2 0c9.6 14.4 16.7 30.6 20.7 48l35.6 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-35.6 0c-13.2 58.3-61.9 103.2-122.2 110.9L274.6 422c14.4 10.3 17.7 30.3 7.4 44.6s-30.3 17.7-44.6 7.4L13.4 314C2.1 306-2.7 291.5 1.5 278.2S18.1 256 32 256l80 0c32.8 0 61-19.7 73.3-48L32 208c-17.7 0-32-14.3-32-32s14.3-32 32-32l153.3 0C173 115.7 144.8 96 112 96L96 96 32 96C14.3 96 0 81.7 0 64z"/></svg>          
+          {totalPayable.toLocaleString('en-IN')}</p>
+      <a href='#PaymentHead' className='cart-placeorder-btn2' onClick={buyButton}>{currentStage === 2 ? 'CONTINUE' : 'PLACE ORDER'}</a>
+        </div>
+        </>
       }
       {addnotchecked && 
       <p>{currentStage === 2 && 'please choose address'}</p>}

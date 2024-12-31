@@ -4,24 +4,13 @@
     justify-content: center;
     align-items: center;
     background-color: #f0f3f4;
-    height:400px;
-    width: 320px;
     overflow: hidden;
     position: relative;
-
+    border-radius: 10px;
 }
 .suitItemImg-box{
-    /* background: transparent;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    max-width: 200px;
-    max-height: 500px;
-    align-items: center; */
     max-height: 430px;
+    cursor: pointer;
 }
 .suitItem-img{
     width: 100%;
@@ -32,38 +21,17 @@
     mix-blend-mode:multiply;
     transition: all .3s ease;
 }
-.chudidarItem-name{
-    font-size: 0.97em;
-    color: black;
-    font-weight: 460;
-    width:240px;
-    height:2.8em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height :1.35em;
-    text-align: center;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    margin: 0 9px;
-}
-
 /* ..........filter.......... */
 .filter-container{
-    font-family:var(--standard-Montserratfont);
-    height:auto;
-    align-self:flex-start;
-    position: sticky;
-    top: 0px;
-    display: flex;
     flex-direction: column;
-    gap: 30px;
     box-sizing: border-box;
+    font-family:var(--standard-Montserratfont);
+    /* height:auto; */
+    align-self:flex-start;
 }
 #filter{
     font-weight: 700;
     color: #171717;
-    font-size: 1.2rem;
     overflow: hidden;
 }
 .filters-details-box{
@@ -92,14 +60,12 @@
 }
 .filter-brandBtn-arrow-container p{
     transform: rotate(270deg);
-    font-size: 1.1rem;
     color: #737373;
     user-select: none;
 }
 .filter-checkbox{
     display: flex;
     flex-direction: column;
-    gap: 17px;
     user-select: none;
     text-transform: uppercase;
     max-height: 165px;
@@ -133,7 +99,6 @@
 .filter-checkboxes label{
     width: 160px;
     text-align: end;
-    font-size: .86rem;
     word-wrap: break-word;
     word-break: break-all;
 }
@@ -144,7 +109,7 @@
     border: none;
     display: inline-block;
     margin-left: 10px;
-    outline: 2px solid grey;
+    outline: 1px solid grey;
 }
 
 

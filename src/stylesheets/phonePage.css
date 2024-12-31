@@ -1,9 +1,13 @@
 .mobileItem-container{
     display: flex;
+    /* flex-wrap: wrap; */
+    /* justify-content: center;
+    align-items: center; */
     font-family: Moderustic;
-    margin-bottom: 10px;
+    border-radius: 10px;
+    padding-bottom: .35pc;
     height: fit-content; 
-    /* new added*/
+    flex-direction: column;
 }
 .bigRupee{
     margin-top:4px;
@@ -28,37 +32,19 @@
     justify-content: center;
     align-items: center;
     background-color: #f0f3f4;
-    width:290px;
-    height:250px;
     overflow: hidden;
     position: relative;
+    border-radius: 10px;
 }
-/* .item-main-container .heart{
-    height:20px;
-    width: 20px;
-    position: absolute;
-    top:9px;
-    right:10px;
-    fill: gray;
-    cursor: pointer;
-    transition: .1s ease;
-    z-index: 1;
-}
-.item-main-container .heart:hover{
-    transform: scale(1.1);
-    fill: #e01e37;
-} */
-
 
 .mobileItemImg-box{
     background: transparent;
     width: 100%;
-    max-width: 200px;
-    max-height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    cursor: pointer;
 }
 .mobileItem-img{
     width: 100%;
@@ -84,8 +70,8 @@
     font-size: 1.2em;
     color: black;
     font-weight: 400;
-    width: fit-content;
-    max-width:50%;
+    /* width: fit-content; */
+    /* max-width:50%; */
     line-height :1.4em;
 }
 .mobileItemDetails-container #phoneItem-name-ID:hover{

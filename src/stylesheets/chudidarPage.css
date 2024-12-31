@@ -1,6 +1,8 @@
 .chudidar-main-container{
     font-family: Moderustic;
-    margin: 0 8px 8px 0;
+    border-radius: 10px;
+    padding-bottom: 1.2pc;
+    overflow: hidden;
 }
 .chudidarItemImg-container{
     display: flex;
@@ -32,11 +34,8 @@
     transition: all .3s ease;
 }
 .chudidarItem-name{
-    font-size: 0.97em;
     color: black;
     font-weight: 460;
-    width:240px;
-    height:2.8em;
     overflow: hidden;
     text-overflow: ellipsis;
     line-height :1.35em;

@@ -1,14 +1,22 @@
+import { jwtDecode } from 'jwt-decode';
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import '../stylesheets/handbagPage.css'
 import axios from 'axios'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { useCart } from './CartProvider'
 import SmallLoader from './SmallLoader'
 import { useWishlist } from './WishlistProvider'
 
 const Handbag = () => {
   const{ addToCart} = useCart();
+
+const location = useLocation();
+const queryParams = new URLSearchParams(location.search); 
+const initialBrand = queryParams.get('brand')?.toLowerCase() || '';
+
+const [showADDnew, setshowADDnew] = useState(false);
+
 const { wishlistItems,addToWishlist } = useWishlist();
 const [isInWishlist, setisInWishlist] = useState(false);
 const [moveHeart, setmoveHeart] = useState({});
@@ -21,12 +29,16 @@ const [moveHeart, setmoveHeart] = useState({});
   const [showFilterBrand , setshowFilterBrand] = useState(true); // show/hide filter toggles
   const [showFilterColor,setshowFilterColor] = useState(true);// show/hide filter toggles
   const [showFilterPrice,setshowFilterPrice] = useState(true); // show/hide filter toggles
+  const [showDiscountOnly, setShowDiscountOnly] = useState(false);
+
   // filter functionality
+  const [showFilterContainer, setshowFilterContainer] = useState(false);
   const [filteredProducts,setfilteredProducts] = useState([]);
-  const [selectedBrand,setSelectedBrand] = useState([]);
+  const [selectedBrand,setSelectedBrand] = useState( initialBrand ? [initialBrand] : []);
   const [selectedColour,setSelectedColour] = useState([]);
   const [selectedPrice,setSelectedPrice] = useState([]);
-  const [errorMessage, setErrorMessage] = useState(''); // Error message state  
+  const [errorMessage, setErrorMessage] = useState(''); // Error message state
+  const [FiltererrorMessage, setFiltererrorMessage] = useState(false);
   const [loading,setLoading] = useState(false);
 
   const [statuscartlabel, setstatuscartlabel] = useState(false);
@@ -51,29 +63,33 @@ const getData = ()=>{
     setMobile(res.data.product);
     const products = res.data.product;
     setfilteredProducts(products); //initially filtered as all products
-    
-     // Debugging: Set dublicateBrand with a check for missing brand names
-     const brandList = products
-     .filter(product => product.brandName) // Ensure the brandName exists
-     .map(product => product.brandName).sort();
-     setdublicateBrand([...new Set(brandList)]); // Set the brand filter list
 
       // Set dublicateColour (unchanged)
-      setdublicateColour([...new Set(products.map(product => product.colour))]);
+      setdublicateColour([...new Set(
+        res.data.product
+          .map(product => product.colour?.toLowerCase()) // Normalize to lowercase
+          .filter(colour => colour) // Filter out empty or undefined values
+      )]);
+      
+      setdublicateBrand([...new Set(
+        res.data.product
+          .map(product => product.brandName?.trim().toLowerCase()) // Normalize case and trim whitespace
+          .filter(brandName => brandName) // Filter out any empty or undefined values
+      )].sort());
+
       const priceRangeLabel = [
       {label:`lowest - highest`, value: `low-high`},
       {label:`highest - lowest`, value: `high-low`},
-      {label:`< 5,000`,value:`0-5000`},
-      {label:`5,000-20,000`,value:`5000-20000`},
-      {label:`20,000-50,000`,value:`20000-50000`},
-      {label:`50,000-75,000`,value:`50000-75000`},
-      {label:`75,000-1,00,000`,value:`75000-100000`}
+      // {label:`< 5,000`,value:`0-5000`},
+      // {label:`5,000-20,000`,value:`5000-20000`},
+      // {label:`20,000-50,000`,value:`20000-50000`},
+      // {label:`50,000-75,000`,value:`50000-75000`},
+      // {label:`75,000-1,00,000`,value:`75000-100000`}
     ];
     setpriceRange(priceRangeLabel);
 })
   .catch(err =>{
     setLoading(false);
-    console.log(err);
     setErrorMessage('failed to load products')
   })
 }
@@ -81,6 +97,10 @@ const getData = ()=>{
 useEffect(() => {
   getData();
 },[])
+
+const toggleDiscountFilter = () => {
+  setShowDiscountOnly((prev) => !prev); // Toggle the discount filter state
+}
 
 
 // filter handlers
@@ -102,8 +122,8 @@ const filterPriceHandler = (priceValue) => {
 useEffect(() => {
   let filtered = mobile; //start with all products
 
-  if(selectedBrand.length > 0 /*&& selectedBrand*/){
-    filtered = filtered.filter(product => selectedBrand.includes(product.brandName));
+  if(selectedBrand.length > 0){
+    filtered = filtered.filter(product => product.brandName && selectedBrand.includes(product.brandName.toLowerCase()));
   }
   if(selectedColour.length > 0 ){
     filtered = filtered.filter(product => selectedColour.includes(product.colour.toLowerCase()));
@@ -119,17 +139,32 @@ useEffect(() => {
     filtered = [...filtered].sort((a,b)=>b.price - a.price); //sort in descending price
   }
 
-if(filtered.length === 0){
-  setErrorMessage('No product matches the filter.');
-}
-else{
-  setErrorMessage('');
-}
+   // Apply Discount Filter
+   if (showDiscountOnly) {
+    filtered = filtered.filter(item => item.realprice > item.price);
+  }
+  
+  if(filtered.length === 0){
+    setFiltererrorMessage(true);
+  }
+  else{
+    setFiltererrorMessage(false);
+  }
 
  setfilteredProducts(filtered); //set filtered products  
-},[selectedBrand,selectedColour,selectedPrice,mobile]);
+},[selectedBrand,selectedColour,selectedPrice, showDiscountOnly, mobile]);
 
-
+const showFilterToggle = () => {
+  setshowFilterContainer(prev =>{
+    const isShownfilter = !prev;
+    const content = document.querySelector('.super-box');
+    if(content){
+      content.style.filter = isShownfilter ? 'blur(5px)' : 'none';
+      content.style.pointerEvents = isShownfilter ? 'none' : 'all';
+    }
+    return isShownfilter;
+  });
+}
 // show hide filters
 const showFilterHandlerBrand = () => {
   setshowFilterBrand(!showFilterBrand);
@@ -242,6 +277,22 @@ const wishlistHandler = (productDetails,index) => {
   setmoveHeart(prev => ({ ...prev, [product._id] : false }));
   }, 2000);
 }
+const token = localStorage.getItem('token');
+const user = localStorage.getItem('username')
+
+  useEffect(() => {
+    if (token) {
+      const decoded = jwtDecode(token); // Decode the JWT
+  
+      // Perform validation only if `decoded` has the expected structure
+      if (decoded?.email === 'iamniteshadmin@gmail.com' && user === 'aryan') {
+        setshowADDnew(true);
+      } else {
+        setshowADDnew(false);
+      }
+    }
+  }, [user]);
+
 return (<>
   {cartMessage && <div className={`cart-msg ${messageVisible ? 'cart-msg-move' : ''}`}>{cartMessage}</div>}
 
@@ -254,10 +305,18 @@ return (<>
       </div>
     </div>
   </div>
+  
+  {loading ? (<div className='loaderNewCont'><div class="loaderNew"></div></div>) :
+errorMessage ? (<p id='noMatch errMsg'>{errorMessage}</p>) :  //error message
+(<>
+ 
+<div className='svgfilterDiv'>
+<svg xmlns="http://www.w3.org/2000/svg" onClick={showFilterToggle} className='filterSvg' height="26px" width="26px" viewBox="0 -960 960 960"><path d="M440-160q-17 0-28.5-11.5T400-200v-240L168-736q-15-20-4.5-42t36.5-22h560q26 0 36.5 22t-4.5 42L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-308 198-252H282l198 252Zm0 0Z"/></svg>
+</div>
 
 <div className='category-container'>
 
-<div className='filter-container'>
+<div className='filter-container filter-container1'>
 <div className='total-items'>
 <h4>HANDBAG</h4>
 <span>({filteredProducts.length} Items)</span>
@@ -266,7 +325,7 @@ return (<>
 <p id='filter'>FILTERS</p>
 <div className='filters-details-box'>
   <div className='filter-brandBtn-arrow-container' onClick={showFilterHandlerBrand}>
-    <button>BRANDS <p>&#10094;</p></button>
+    <button>BRAND {`(${dublicateBrand.length})`}<p>&#10094;</p></button>
   </div>
   {showFilterBrand && 
   <div className='filter-checkbox'>
@@ -275,7 +334,7 @@ return (<>
     <div className='filter-checkboxes' key={index} >
   <input type='checkbox' value={brand} id={brand} onChange={()=>filterBrandHandler(brand)} 
   checked={selectedBrand.includes(brand)}/>
-  <label htmlFor={brand}>{brand}</label></div>
+  <label htmlFor={brand}>{brand.charAt(0).toUpperCase() + brand.slice(1)}</label></div>
   ))
   })}
 </div>}
@@ -302,13 +361,17 @@ return (<>
 
 <div className='filters-details-box'>
   <div className='filter-brandBtn-arrow-container' onClick={showFilterHandlerPrice}>
-    <button>PRICE</button> <p>&#10094;</p>
+    <button>SORT</button> <p>&#10094;</p>
   </div>
   {showFilterPrice &&
   <div className='filter-checkbox' >
+    <div className='filter-checkboxes'>
+    <input type="checkbox" id="discountOnly"  onChange={() => toggleDiscountFilter()} checked={showDiscountOnly}/>
+    <label htmlFor="discountOnly">Discount</label>
+    </div>
   {priceRange.map((prices,index) => {
     return (
-      <div className='filter-checkboxes' key={index} >
+    <div className='filter-checkboxes' key={index} >
     <input type='checkbox' name='price' id={prices.value} value={prices.value} onChange={() => filterPriceHandler(prices.value)}
      checked={selectedPrice === prices.value}/>
     <label htmlFor={prices.value}>{prices.label}</label>
@@ -317,17 +380,88 @@ return (<>
   })}
   </div>
   }
+</div>
+</div>
+
+{showFilterContainer &&
+<div className='filter-container filter-container2'>
+<div className='total-items'>
+<h4>HANDBAG</h4>
+<span>({filteredProducts.length} Items)</span>
+</div>
+
+<p id='filter'>FILTERS</p>
+<div className='filters-details-box'>
+  <div className='filter-brandBtn-arrow-container' onClick={showFilterHandlerBrand}>
+    <button>BRAND {`(${dublicateBrand.length})`}<p>&#10094;</p></button>
+  </div>
+  {showFilterBrand && 
+  <div className='filter-checkbox'>
+  {dublicateBrand.map((brand,index) => {
+  return (brand && (
+    <div className='filter-checkboxes' key={index} >
+  <input type='checkbox' value={brand} id={brand} onChange={()=>filterBrandHandler(brand)} 
+  checked={selectedBrand.includes(brand)}/>
+  <label htmlFor={brand}>{brand.charAt(0).toUpperCase() + brand.slice(1)}</label></div>
+  ))
+  })}
+</div>}
+</div>
+
+<div className='filters-details-box'>
+  <div className='filter-brandBtn-arrow-container'  onClick={showFilterHandlerColor}>
+    <button>COLORS</button> <p>&#10094;</p>
+  </div>
+  {showFilterColor &&
+   <div className='filter-checkbox'>
+   {dublicateColour.map((colour,index) => {
+     return (colour && (
+       <div className='filter-checkboxes' key={index}>
+      <input type='checkbox' value={colour} id={colour} onChange={() => filterColourHandler(colour)} 
+      checked={selectedColour.includes(colour)}/><label htmlFor={colour}>{colour}
+        <div className='filter-color' style={{backgroundColor:colour}}/></label>
+       </div>
+     ))
+   })}
+ </div>
+  }
 </div> 
 
-</div> 
-{loading ? (<p id='loadingProducts'>loading products</p>) :
-errorMessage ? (<p>{errorMessage}</p>) :  //error message for filter
-(<div className='super-box'> 
+<div className='filters-details-box'>
+  <div className='filter-brandBtn-arrow-container' onClick={showFilterHandlerPrice}>
+    <button>SORT</button> <p>&#10094;</p>
+  </div>
+  {showFilterPrice &&
+  <div className='filter-checkbox' >
+    
+    <div className='filter-checkboxes'>
+    <input type="checkbox" id="discountOnly"  onChange={() => toggleDiscountFilter()} checked={showDiscountOnly}/>
+    <label htmlFor="discountOnly">Discount</label>
+    </div>
+
+  {priceRange.map((prices,index) => {
+    return (
+    <div className='filter-checkboxes' key={index} >
+    <input type='checkbox' name='price' id={prices.value} value={prices.value} onChange={() => filterPriceHandler(prices.value)}
+     checked={selectedPrice === prices.value}/>
+    <label htmlFor={prices.value}>{prices.label}</label>
+    </div>
+    )
+  })}
+  </div>
+  }
+</div>
+</div>
+}
+
+{FiltererrorMessage ? (<p id='noMatch'>{'No product matches the filter.'}</p>) :
+<div className='super-box super-boxChudidar'> 
+<div className='laptopBannerDiv'><img id='handbagBanner' src={require('../assests/handbagbanner.jpg')} style={{marginBottom:'1pc'}}/><p>HandBag</p></div>
 { (filteredProducts.length > 0 ? filteredProducts : mobile).map((eachMobile,index)  => {
   return (
     <div className='chudidar-main-container' key={eachMobile._id}>
     <div className='suitItemImg-container'>
-        <div className='suitItemImg-box'>
+        <div className='suitItemImg-box' onClick={()=>navigateSoloLaptop(eachMobile._id)}>
             <a onClick={()=>navigateSoloLaptop(eachMobile._id)}><img className='suitItem-img' alt={eachMobile.title} 
             src={eachMobile.photo}/></a>
             </div>
@@ -339,56 +473,29 @@ errorMessage ? (<p>{errorMessage}</p>) :  //error message for filter
       <div className='handbagItemPriceDetail'>
         <div className='handbagItem-Price'>{svgRupee}<p id='mobleItem-realprice'>{Number(eachMobile.price).toLocaleString('en-IN')}</p></div>
         {eachMobile.discount && <div className='handbagItem-cancelPrice'>{svgRupeeSmall}<p id='mobleItem-cancelprice'>{Number(eachMobile.realprice).toLocaleString('en-IN')}</p>
-         <p id='handbagitem-discount'>({eachMobile.discount} % off)</p></div>}
+         <p id='handbagitem-discount'>{eachMobile.discount} % off</p></div>}
       </div>
       <button className={`items-Cart cartbtnFCN-${index}`} id='items-card-ID' 
       onClick={()=>handleAddtoCart(eachMobile,index)}>{statuscartlabel & cartLoading[index] ? (<SmallLoader/>):(<> {cartlabel}</>)}</button>
-      <div className='upd-del'>
+        {showADDnew && <div className='upd-del'>
           <button id='updateItem' onClick={() => updateProduct(eachMobile._id)}>Update</button>
           <button id='deleteItem' onClick={() => deleteProduct(eachMobile._id)}>Delete</button>
-        </div>    </div>
+        </div>}    </div>
     </div> 
 
   )
 })
 }
-</div>  )}
+</div>
+}
 
+</div>
 
-</div> 
+</>
+)}
 
 
   </>)
 }
 
 export default Handbag;
-
-/* <div className='super-box'> 
-{mobile.map((eachMobile)  => {
-  return (
-    <div className='handbag-main-container' key={eachMobile._id}>
-    <div className='handbagItemImg-container'>
-        <div className='handbagItemImg-box'>
-            <a onClick={()=>navigateSoloLaptop(eachMobile._id)}><img className='handbagItem-img' alt={eachMobile.title} 
-            src={eachMobile.photo}/></a>
-            </div>
-        {svgHeart}
-    </div>
-    <div className='handbagItemDetails-container'>
-      <p id='brandName'>{eachMobile.brandName}</p>
-      <a className='handbagItem-name' id='handbagItem-name-ID' onClick={()=>navigateSoloLaptop(eachMobile._id)}>{eachMobile.title}</a>
-      <div className='handbagItemPriceDetail'>
-        <div className='handbagItem-Price'>{svgRupee}<p id='mobleItem-realprice'>{Number(eachMobile.price).toLocaleString('en-IN')}</p></div>
-        {eachMobile.discount && <div className='handbagItem-cancelPrice'>{svgRupeeSmall}<p id='mobleItem-cancelprice'>{Number(eachMobile.realprice).toLocaleString('en-IN')}</p>
-         <p id='handbagitem-discount'>({eachMobile.discount} % off)</p></div>}
-      </div>
-      <p style={{fontSize:'.8em'}}>FREE delivery</p>
-      <button className='items-Cart' id='items-card-ID'>Add to Cart</button>
-      <p style={{fontSize:'.89em',marginBottom:'15px'}}>2 in cart - <buton id='removeCart'>Remove</buton></p>
-    </div>
-    </div> 
-
-  )
-})
-}
-</div>  */
