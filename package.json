@@ -5,6 +5,7 @@
   "description": "rest api for mean stack app",
   "main": "server.js",
   "scripts": {
+    "preinstall": "npm install react-scripts",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -12,8 +13,8 @@
     "start-api": "node server.js"
   },
   "engines": {
-    "node": "16.x",
-    "npm": "7.x"
+    "node": "18.x",
+    "npm": "8.x"
   },
   "keywords": [
     "api"
