@@ -5,6 +5,7 @@
   "description": "rest api for mean stack app",
   "main": "server.js",
   "scripts": {
+    "prepare": "npm install react-scripts",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
