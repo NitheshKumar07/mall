@@ -1,3 +1,4 @@
+// https://website-api-nu.vercel.app
 import { jwtDecode } from 'jwt-decode';
 import React, { useEffect, useRef, useState } from 'react'
 import '../stylesheets/homePage.css'
@@ -56,7 +57,7 @@ const AllProducts = () => {
 
   useEffect(() => {
     setLoading(true);   
-    axios.get('https://website-api-nu.vercel.app/product/category/66e0ac832e6bda2ea8fee821')
+    axios.get('https://website-api-xq9y.onrender.com/product/category/66e0ac832e6bda2ea8fee821')
       .then(res => {
         setLoading(false);
         const nikeProducts = res.data.product.filter(item => item.brandName && item.brandName.toLowerCase() === 'nike').slice(-10);
