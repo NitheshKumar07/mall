@@ -12,6 +12,10 @@
     "postinstall": "npm install react-scripts",
     "start-api": "node server.js"
   },
+  "engines": {
+  "node": "16.x",
+  "npm": "7.x"
+},
   "keywords": [
     "api"
   ],
