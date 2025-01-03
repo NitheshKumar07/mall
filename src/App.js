@@ -40,10 +40,10 @@ import WishlistProvider from "./documents/WishlistProvider";
 function App() {
   const router = createBrowserRouter([
     {
-      path: 'https://website-api-nu.vercel.app',
+      path: '',
       element: <Layout />,
       children: [
-        { path: 'https://website-api-nu.vercel.app', element: <AllProducts /> },
+        { path: '', element: <AllProducts /> },
         { path: 'signup', element: <Signup /> },
         { path: 'login', element: <Login /> },
         { path: 'post', element: <Post /> },
